@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("finance")
 public class financeController {
     @RequestMapping("finance-account-billofloading")
     public String finance_account_billofloading() {

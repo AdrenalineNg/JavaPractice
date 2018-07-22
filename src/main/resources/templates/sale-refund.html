@@ -50,10 +50,10 @@
     <div class="statck-nav">
         <ul class="nav nav-pills nav-stacked">
             <li role="presentation" class="active">
-                <a href="#">订单</a>
+                <a href="#"th:href="@{/sale}">订单</a>
             </li>
             <li role="presentation">
-                <a href="#">客户</a>
+                <a href="#"th:href="@{/sale-user}">客户</a>
             </li>
         </ul>
     </div>
@@ -61,8 +61,8 @@
         <h3>订单</h3>
         <div class="detail-tab">
             <ul class="nav nav-tabs">
-                <li role="presentation"><a href="#">订单</a></li>
-                <li role="presentation" class="active"><a href="#">退货单</a></li>
+                <li role="presentation"><a href="#"th:href="@{/sale}">订单</a></li>
+                <li role="presentation" class="active"><a href="#"th:href="@{/sale-refund}">退货单</a></li>
             </ul>
 
         </div>
@@ -90,7 +90,7 @@
                     <td>{{审核状态}}</td>
                     <td>{{付款状态}}</td>
                     <td>
-                        <span style="margin-left: 10px;"><a href="#">详情</a></span>
+                        <span style="margin-left: 10px;"><a href="#"th:href="@{/sale-refund-detail}">详情</a></span>
                     </td>
                 </tr>
                 </tbody>
