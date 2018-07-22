@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>用户订单</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="stylesheet" href="../../static/css/user/user.css">
+</head>
+
+<body>
+<div class="main">
+    <nav class="navbar navbar-default my-nav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <img src="../../static/img/Logo.png" alt="" class="img-responsive center-block" style="height: 50px;">
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">用户</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">消息
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">业务消息</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#">news</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="statck-nav">
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="active">
+                <a href="#">订单</a>
+            </li>
+            <li role="presentation">
+                <a href="#">商品</a>
+            </li>
+            <li role="presentation">
+                <a href="#">购物车</a>
+            </li>
+        </ul>
+    </div>
+    <div class="item-detail">
+        <h3>订单</h3>
+        <div class="detail-tab">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#">订单详情</a></li>
+            </ul>
+        </div>
+        <div class="item-detail-main">
+            <p class="bg-primary detail-hint">
+                <span>
+                    订单号：{{单号}}
+                </span>
+                <br>
+                <br>
+                <span>
+                    状态：{{订单状态}}
+                </span>
+            </p>
+            <div class="order-list">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <td>主图</td>
+                        <td>商品编码</td>
+                        <td>商品名称</td>
+                        <td>规格</td>
+                        <td>单价</td>
+                        <td>数量</td>
+                        <td>小计</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><img src="../../static/img/1.jpg" alt=""></td>
+                        <td>{{商品编码}}</td>
+                        <td>{{商品名称}}</td>
+                        <td>{{规格}}</td>
+                        <td>{{单价}}</td>
+                        <td>{{数量}}</td>
+                        <td>{{小计}}</td>
+                    </tr>
+                    <tr>
+                        <td><img src="../../static/img/1.jpg" alt=""></td>
+                        <td>{{商品编码}}</td>
+                        <td>{{商品名称}}</td>
+                        <td>{{规格}}</td>
+                        <td>{{单价}}</td>
+                        <td>{{数量}}</td>
+                        <td>{{小计}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-info">
+                <span>退款金额：{{退款金额}}</span>
+                <br>
+                <span>商品数量：{{商品数量}}</span>
+                <a href="#" style="float:right;" >退款</a>
+                <br>
+                <button class="btn btn-default" style="float:right;margin-bottom: 5px;" type="submit">确认收货</button>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>备注：{{备注}}</td>
+                    </tr>
+                    <tr>
+                        <td>收货人信息：{{收货人信息}}</td>
+                    </tr>
+                    <tr>
+                        <td>制单人：{{制单人}}</td>
+                    </tr>
+                    <tr>
+                        <td>日期：{{日期}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-default" style="float:right;margin: 0 10px 10px 0;" type="submit">返回</button>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="../../static/js/index.js"></script>
+<script src="../../static/js/user/user.js"></script>
+</body>
+
+</html>
