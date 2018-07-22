@@ -6,24 +6,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("boss")
 public class bossController {
-    @RequestMapping("moneylist")
+    @RequestMapping("boss-moneylist")
     public String moneylist() {
         return "boss-moneylist";
     }
     
-    @RequestMapping("plan")
+    @RequestMapping("boss-plan")
     public String plan() {
         return "boss-plan";
     }
     
-    @RequestMapping("refund")
+    @RequestMapping("boss-refund")
     public String refund() {
         return "boss-refund";
     }
     
-    @RequestMapping("restorhouse")
+    @RequestMapping("boss-restorhouse")
     public String restorhouse() {
         return "boss-restorhouse";
     }

@@ -53,10 +53,10 @@
                 <a href="#">订单</a>
             </li>
             <li role="presentation">
-                <a href="#">商品</a>
+                <a href="#"th:href="@{/shopping}">商品</a>
             </li>
             <li role="presentation">
-                <a href="#">购物车</a>
+                <a href="#"th:href="@{/shoppingcart}">购物车</a>
             </li>
         </ul>
     </div>
@@ -64,8 +64,8 @@
         <h3>订单</h3>
         <div class="detail-tab">
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="#">订单</a></li>
-                <li role="presentation"><a href="#">退货单</a></li>
+                <li role="presentation" class="active"><a href="#"th:href="@{/user-order}">订单</a></li>
+                <li role="presentation"><a href="#"th:href="@{/user-refund}">退货单</a></li>
             </ul>
 
         </div>
@@ -94,7 +94,7 @@
                     <td>{{付款状态}}</td>
                     <td>
                         <button class="btn btn-default" type="submit">确认收货</button>
-                        <span style="margin-left: 10px;"><a href="#">详情</a></span>
+                        <span style="margin-left: 10px;"><a href="#" th:href="@{/user-order-detail}">详情</a></span>
                     </td>
                 </tr>
                 </tbody>

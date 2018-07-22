@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("finishedProducLibrary")
 public class FinishedProductLibraryController {
     
     @RequestMapping("finishedProducLibrary")
