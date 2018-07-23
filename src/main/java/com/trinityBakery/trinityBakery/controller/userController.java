@@ -2,18 +2,35 @@ package com.trinityBakery.trinityBakery.controller;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.trinityBakery.trinityBakery.dao.goodRepository;
+import com.trinityBakery.trinityBakery.model.good;
 
 
 
 @Controller
 public class userController {
+	@Autowired
+	private goodRepository goodrepository;
     
-    @RequestMapping("shopping")
+    @GetMapping("shopping")
     public String shopping() {
         return "shopping";
+    }
+    @PostMapping("shopping")
+    public List<good> shoppingxianshi() {
+    	List<good> list = new ArrayList<good>();
+    	list = goodrepository.findAll();
+    	return list;
     }
     
     @RequestMapping("shoppingcart")

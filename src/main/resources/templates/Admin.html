@@ -81,7 +81,18 @@
                     <td>操作</td>
                 </tr>
                 </thead>
-                <tbody id="insert-people">
+                <tbody id="insert-people" >
+                <tr th:each="a:${admin}">
+                	<td>[(${a.a_name})]</td>
+                	<td>[(${a.a_id})]</td>
+                	<td>[(${a.a_department})]</td>
+                	<td>[(${a.a_tel})]</td>
+                	<td>[(${a.a_email})]</td>
+                	<td>
+                         <a href="#" data-toggle="modal" data-target="#changeAdmin" onclick="showAdmin(this)">修改</a>
+                         <a href="#" onclick="delAdmin(this)">删除</a> 
+                	</td>
+                </tr>
                 </tbody>
             </table>
             <hr style="color: #40E0D0">

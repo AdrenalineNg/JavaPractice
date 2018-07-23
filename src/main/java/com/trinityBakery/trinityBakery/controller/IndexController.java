@@ -40,7 +40,7 @@ public class IndexController {
             } else if ("boss".equals(password)) {
                 return "boss";
             } else if ("admin".equals(password)) {
-                return "Admin";
+                return "redirect:/admin/index";
             } else if ("production".equals(password)) {
                 return "productionWork";
             } else return "login";
