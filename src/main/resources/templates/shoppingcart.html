@@ -15,15 +15,15 @@
 <div class="main">
     <div th:insert="~{Admin::topbar}"></div>
     <div class="statck-nav">
-        <ul class="nav nav-pills nav-stacked">
+        <ul class="nav nav-pills nav-stacked" th:fragment="userbar">
             <li role="presentation" >
                 <a href="#"th:href="@{/user-order}">订单</a>
             </li>
             <li role="presentation">
                 <a href="#"th:href="@{/shopping}">商品</a>
             </li>
-            <li role="presentation" class="active">
-                <a href="#">购物车</a>
+            <li role="presentation">
+                <a href="#" th:href="@{/shoppingcart}">购物车</a>
             </li>
         </ul>
     </div>
@@ -50,15 +50,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr id="p-1">
                         <td><img src="../../static/img/1.jpg" alt=""></td>
                         <td>{{商品编码}}</td>
                         <td>{{商品名称}}</td>
                         <td>{{规格}}</td>
                         <td>{{单价}}</td>
-                        <td>{{数量}}</td>
+                        <td id="p-1-num">1</td>
                         <td>{{小计}}</td>
-                        <td>操作</td>
+                        <td>
+                            <button id="AddBtn-1" onclick="AddNumber(this)">+</button>
+                            <button id="ReduceBtn-1" onclick="ReduceNumber(this)">-</button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -67,7 +70,7 @@
                 <span>金额：{{金额}}</span>
                 <br>
                 <span>商品数量：{{商品数量}}</span>
-                <button class="btn btn-primary" style="float:right;margin-bottom: 5px;" type="submit">确认下单</button>
+                <button class="btn btn-primary" style="float:right;margin-bottom: 5px;" type="submit" onclick="confirmCart()">确认下单</button>
                 <table class="table">
                     <tbody>
                     <tr>
@@ -90,6 +93,31 @@
         crossorigin="anonymous"></script>
 <script src="../../static/js/index.js"></script>
 <script src="../../static/js/user/user.js"></script>
+<script>
+    function AddNumber(self) {
+        var id = self.id.toString().charAt(self.id.toString().length-1);
+        var num = $('#p-'+id+'-num').text();
+        $('#p-'+id+'-num').text(parseInt(num)+1);
+    }
+    function ReduceNumber(self){
+        var id = self.id.toString().charAt(self.id.toString().length-1);
+        var num = $('#p-'+id+'-num').text();
+        $('#p-'+id+'-num').text(parseInt(num)-1);
+        if(parseInt(num)-1==0){
+            delPro(id);
+        }
+    }
+    function delPro(id) {
+        $('#p-'+id).hide();
+    }
+    
+    function confirmCart() {
+        var data = document.getElementsByTagName('tbody').children;
+        for(var i in data){
+            alert(i);
+        }
+    }
+</script>
 </body>
 
 </html>
