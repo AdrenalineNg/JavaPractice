@@ -37,7 +37,7 @@ public class TrinityBakeryApplication {
 				return "ProductionPlanningSection";
 			}
 			else if("fpl".equals(password)) {
-				return "finishedProducLibrary";
+				return "storehouse";
 			}
 			else if("boss".equals(password)) {
 				return "boss";
