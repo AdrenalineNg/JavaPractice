@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -13,44 +13,14 @@
 
 <body>
 <div class="main">
-    <nav class="navbar navbar-default my-nav">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <img src="../../static/img/Logo.png" alt="" class="img-responsive center-block" style="height: 50px;">
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#">用户</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">消息
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">业务消息</a>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li>
-                                <a href="#">news</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
+    <div th:insert="~{Admin::topbar}"></div>
     <div class="statck-nav">
         <ul class="nav nav-pills nav-stacked">
             <li role="presentation" class="active">
-                <a href="#">提货单</a>
+                <a href="#" >订单</a>
+            </li>
+            <li role="presentation">
+                <a th:href="@{/storehouse}">仓库</a>
             </li>
         </ul>
     </div>
