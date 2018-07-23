@@ -27,12 +27,12 @@
         <div class="item-detail-main">
             <p class="bg-primary detail-hint">
                 <span>
-                    订单号：{{单号}}
+                    订单号：<span th:text="${o_id}">{{单号}}</span>
                 </span>
                 <br>
                 <br>
                 <span>
-                    状态：{{订单状态}}
+                    状态：<span th:text="${o_pay}">{{订单状态}}</span>
                 </span>
             </p>
             <div class="order-list">
@@ -48,48 +48,40 @@
                         <td>小计</td>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td><img src="../../static/img/1.jpg" alt=""></td>
-                        <td>{{商品编码}}</td>
-                        <td>{{商品名称}}</td>
-                        <td>{{规格}}</td>
-                        <td>{{单价}}</td>
-                        <td>{{数量}}</td>
-                        <td>{{小计}}</td>
-                    </tr>
-                    <tr>
-                        <td><img src="../../static/img/1.jpg" alt=""></td>
-                        <td>{{商品编码}}</td>
-                        <td>{{商品名称}}</td>
-                        <td>{{规格}}</td>
-                        <td>{{单价}}</td>
-                        <td>{{数量}}</td>
-                        <td>{{小计}}</td>
+                    <tbody id="t_body">
+                    <tr id="p-1" th:each="p:${production}">
+                        <td><img src="../../static/img/1.jpg" th:img="${p.p_img}" alt=""></td>
+                        <td id = "cartId" th:text="${p.p_id}">{{id}}</td>
+                        <td th:text="${p.p_name}">{{商品名称}}</td>
+                        <td th:text="${p.p_weight}">{{规格}}</td>
+                        <td id="p-1-price" th:text="${p.p_price}">5</td>
+                        <td id="p-1-num" th:text="${p.p_num}">1</td>
+                        <td id="p-1-money" th:text="${p.p_money}">5</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div class="form-info">
-                <span>退款金额：{{退款金额}}</span>
+                <span>金额：<span id="total-money"></span></span>
                 <br>
-                <span>商品数量：{{商品数量}}</span>
+                <span>商品数量：<span id="total-num"></span></span>
                 <a href="#" style="float:right;" >退款</a>
                 <br>
-                <button class="btn btn-default" style="float:right;margin-bottom: 5px;" type="submit">确认收货</button>
+                <button class="btn btn-default" style="float:right;margin-bottom: 5px;" type="submit"  onclick="confirmReceipt()"
+                        th:disabled="${o_pay}? #{true} : #{false}">确认收货</button>
                 <table class="table">
                     <tbody>
                     <tr>
-                        <td>备注：{{备注}}</td>
+                        <td>备注：<span th:text="${o_demo}">{{备注}}</span></td>
                     </tr>
                     <tr>
-                        <td>收货人信息：{{收货人信息}}</td>
+                        <td>收货人信息：<span th:text="${o_user}">{{收货人信息}}</span></td>
                     </tr>
                     <tr>
-                        <td>制单人：{{制单人}}</td>
+                        <td>制单人：<span th:text="${o_sele}">{{制单人}}</span></td>
                     </tr>
                     <tr>
-                        <td>日期：{{日期}}</td>
+                        <td>日期：<span th:text="${o_date}">{{日期}}</span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -105,6 +97,34 @@
         crossorigin="anonymous"></script>
 <script src="../../static/js/index.js"></script>
 <script src="../../static/js/user/user.js"></script>
+<script>
+    function confirmReceipt() {
+        var id = $('#cartId').text();
+        $.ajax({
+            url:'/ajax/confirmReceipt',
+            type:'post',
+            data:'id='+id,
+            success:function (re) {
+                alert(re);
+                location.reload();
+            }
+        });
+
+    }
+    /* 初始化 总金额 等数据*/
+    var trList = $('#t_body').children("tr");
+    var _totalNum = 0;
+    var _totalMoney = 0;
+    for (var i=0;i<trList.length;i++) {
+        var ids = trList[i].id;
+        var num = $('#'+ids+'-num').text();
+        var money = $('#'+ids+'-money').text();
+        _totalNum +=parseInt(num);
+        _totalMoney+=parseInt(money);
+    }
+    $('#total-num').text(_totalNum);
+    $('#total-money').text(_totalMoney);
+</script>
 </body>
 
 </html>
