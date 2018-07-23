@@ -54,3 +54,6 @@ body {
     height: 30px;
     line-height: 30px;
 }
+.col-md-4{
+    width: 20%;
+}

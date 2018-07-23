@@ -15,17 +15,7 @@
 <div class="main">
     <div th:insert="~{Admin::topbar}"></div>
     <div class="statck-nav">
-        <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="active">
-                <a href="#"th:href="@{/user-order}">订单</a>
-            </li>
-            <li role="presentation">
-                <a href="#"th:href="@{/shopping}">商品</a>
-            </li>
-            <li role="presentation">
-                <a href="#"th:href="@{/shopping}">购物车</a>
-            </li>
-        </ul>
+        <div th:replace="~{shoppingcart::userbar}"></div>
     </div>
     <div class="item-detail">
         <h3>订单</h3>
@@ -96,6 +86,7 @@
         crossorigin="anonymous"></script>
 <script src="../../static/js/index.js"></script>
 <script src="../../static/js/user/user.js"></script>
+
 </body>
 
 </html>

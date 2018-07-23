@@ -81,4 +81,36 @@ public class AjaxController {
         }
         return "success";
     }
+
+    @PostMapping("/addNumber")
+    public String addNmber(HttpServletRequest request){
+        String id = request.getParameter("id");
+        // 购物车商品id为id的 数量加一
+        return "success";
+    }
+
+    @PostMapping("/reduceNumber")
+    public String reduceNumber(HttpServletRequest request){
+        String id = request.getParameter("id");
+        // 购物车商品id为id的 数量减一
+        //数量为零时删除购物车内该商品
+        return "success";
+    }
+    @PostMapping("/confirmCart")
+    public String confirmCart(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String demo = request.getParameter("demo");
+        String address = request.getParameter("address");
+        //将购物车id为id的表改为订单
+        //删除购物车表单
+        return "success";
+    }
+    @PostMapping("/addCart")
+    public String addCart(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String number = request.getParameter("number");
+        //将商品id为id的加入购物车
+        //数量为number
+        return "success";
+    }
 }

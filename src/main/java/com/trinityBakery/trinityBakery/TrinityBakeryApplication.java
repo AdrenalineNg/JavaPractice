@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 
 public class TrinityBakeryApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(TrinityBakeryApplication.class, args);
 	}
