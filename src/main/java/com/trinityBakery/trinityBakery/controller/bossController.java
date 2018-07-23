@@ -6,29 +6,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@RequestMapping("/boss")
 public class bossController {
-    @RequestMapping("boss-moneylist")
+
+    @RequestMapping("/boss")
+    public String boss() {
+        return "boss";
+    }
+    @RequestMapping("/moneylist")
     public String moneylist() {
         return "boss-moneylist";
     }
     
-    @RequestMapping("boss-plan")
+    @RequestMapping("/plan")
     public String plan() {
         return "boss-plan";
     }
     
-    @RequestMapping("boss-refund")
+    @RequestMapping("/refund")
     public String refund() {
         return "boss-refund";
     }
     
-    @RequestMapping("boss-restorhouse")
+    @RequestMapping("/restorhouse")
     public String restorhouse() {
         return "boss-restorhouse";
     }
-    
-    @RequestMapping("boss")
-    public String boss() {
-        return "boss";
-    }
+
+
 }
