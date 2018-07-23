@@ -40,41 +40,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{单号}}</td>
-                    <td>{{制单人}}</td>
-                    <td>{{金额}}</td>
-                    <td>{{订单}}</td>
-                    <td>{{审核状态}}</td>
-                    <td>{{退款状态}}</td>
+                <tr th:each="p:${prodduction}">
+                    <td th:text="${p.r_id}">{{单号}}</td>
+                    <td th:text="${p.r_sales}">{{制单人}}</td>
+                    <td th:text="${p.r_totalMoney}">{{金额}}</td>
+                    <td th:text="${p.r_order}">{{订单号}}}</td>
+                    <td th:text="${p.r_audit}">{{审核状态}}</td>
+                    <td th:text="${p.r_pay}">{{退款状态}}</td>
                     <td>
-                        <button class="btn btn-default" type="submit">确认收货</button>
-                        <span style="margin-left: 10px;"><a href="#"th:href="@{/user-refund-detail}">详情</a></span>
+                        <!--这里渲染订单id-->
+                        <button class="btn btn-default" type="submit" th:id="${p.r_id}" onclick="confirmRefound(this)"
+                                th:disabled="${p.r_pay}? #{true} : #{false}">确认收款</button>
+                        <span style="margin-left: 10px;"><a href="#" th:href="@{/user-refund-detail/} + ${p.r_id}">详情</a></span>
                     </td>
                 </tr>
-
                 </tbody>
             </table>
             <hr style="color: #40E0D0">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
 
         </div>
     </div>
@@ -86,7 +68,21 @@
         crossorigin="anonymous"></script>
 <script src="../../static/js/index.js"></script>
 <script src="../../static/js/user/user.js"></script>
+<script>
+    function confirmRefound(self) {
+        var id = self.id;
+        $.ajax({
+            url:'/ajax/confirmRefound',
+            type:'post',
+            data:'id='+id,
+            success:function (re) {
+                alert(re);
+                location.reload();
+            }
 
+        });
+    }
+</script>
 </body>
 
 </html>

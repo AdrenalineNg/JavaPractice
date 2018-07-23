@@ -16,7 +16,7 @@
 <div class="main">
     <div th:insert="~{Admin::topbar}"></div>
     <div class="statck-nav">
-       <div th:replace="~{shoppingcart::userbar}"></div>
+        <div th:replace="~{shoppingcart::userbar}"></div>
     </div>
     <div class="item-detail">
         <h3>商品</h3>
@@ -27,44 +27,27 @@
 
         </div>
         <div class="item-detail-main">
-            <div class="row" th:each="p:${production}">
-                <div class="col-sm-6 col-md-4">
+            <div class="row" >
+                <div class="col-sm-6 col-md-4" th:each="p:${production}">
                     <div class="thumbnail">
-                        <img th:src="${p.url}" alt="...">
+                        <img th:src="${p.g_img}" alt="...">
                         <div class="caption">
-                            <h3>金额：[(${p.price}})]</h3>
+                            <h3 th:text="${p.g_name}"></h3>
                             <div class="form-group">
-                                <label>名称：[(${p.name}})]</label>
+                                <label th:text="${p.g_price}"></label>
                                 <br>
                                 <label>数量</label>
-                                <input type="text" class="form-control" th:id="${p.id}-number" placeholder="请输入数量">
-                            </div>
-                            <p><a href="#" class="btn btn-primary btn-block" role="button">加入购物车</a>
-                                <input type="hidden" th:value="${p.id}"></p>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="../static/img/1.jpg" alt="...">
-                        <div class="caption">
-                            <h3>金额：123</h3>
-                            <div class="form-group">
-                                <label>名称：123</label>
-                                <br>
-                                <label >数量</label>
-                                <input type="text" class="form-control" id="1-number" placeholder="请输入数量">
+                                <input type="text" class="form-control" th:id="${p.g_id}" placeholder="请输入数量">
                             </div>
                             <p><a href="#" class="btn btn-primary btn-block" role="button" onclick="addCart(this)">加入购物车</a>
-                                <input type="hidden" value="1"></p>
+                                <input type="hidden" th:value="${p.g_id}"></p>
                         </div>
                     </div>
                 </div>
+
+
             </div>
+
             <hr style="color: #40E0D0">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
@@ -99,7 +82,7 @@
 <script>
     function addCart(self) {
         var id = self.parentNode.childNodes[2].value;
-        var number = $('#'+id+'-number').val();
+        var number = $("#"+id).val();
         if(number){
             $.ajax({
                 url:'/ajax/addCart',
