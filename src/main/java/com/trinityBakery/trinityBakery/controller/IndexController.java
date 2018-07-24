@@ -42,7 +42,7 @@ public class IndexController {
             } else if ("admin".equals(password)) {
                 return "redirect:/admin/index";
             } else if ("production".equals(password)) {
-                return "productionWork";
+                return "redirect:/production/work";
             } else return "login";
         } else {
             //登陆失败
