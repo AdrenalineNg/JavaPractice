@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -45,39 +45,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{单号}}</td>
-                    <td>{{制单人}}</td>
-                    <td>{{金额}}</td>
-                    <td>{{收货地址}}</td>
-                    <td>{{状态}}</td>
+                <tr th:each="t:${froms}">
+                    <td th:text="${t.id}">{{单号}}</td>
+                    <td th:text="${t.accounter}">{{会计}}</td>
+                    <td th:text="${t.money}">{{金额}}</td>
+                    <td th:text="${t.address}">{{收货地址}}</td>
+                    <td th:text="${t.is_out}">{{提货状态}}</td>
                     <td>
-                        <span style="margin-left: 10px;"><a href="#">提货</a></span>
+                        <span style="margin-left: 10px;"><a th:href="@{/fpl-change/}+${t.id}">提货</a></span>
                     </td>
                 </tr>
                 </tbody>
             </table>
             <hr style="color: #40E0D0">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
         </div>
     </div>
 </div>

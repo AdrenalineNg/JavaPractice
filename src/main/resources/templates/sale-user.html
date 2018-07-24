@@ -27,10 +27,12 @@
     <div class="item-detail">
         <h3>客户
             <span>
-                <div>
-                    <input type="password" class="form-control user-search" placeholder="请输入客户相关信息" style="float: left;">
-                    <button class="btn btn-default" type="submit">搜索</button>
-                </div>
+                <form method="post" th:action="@{/sale-search-user}">
+                    <div>
+                        <input type="password"  name="search-name" class="form-control user-search" placeholder="请输入客户名称" style="float: left;">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                    </div>
+                </form>
             </span>
         </h3>
 
@@ -39,16 +41,7 @@
                 <li role="presentation" class="active"><a href="#">客户列表</a></li>
             </ul>
             <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    全部级别 <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">全部级别</a></li>
-                    <li><a href="#">普通</a></li>
-                    <li><a href="#">VIP</a></li>
-                    <li><a href="#">SVIP</a></li>
-                </ul>
-                <button type="button" class="btn btn-default">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#create">
                     新增客户
                 </button>
             </div>
@@ -66,50 +59,118 @@
                     <td>地址</td>
                     <td>级别</td>
                     <td>电话</td>
-                    <td>qq</td>
                     <td>邮箱</td>
                     <td>操作</td>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{单号}}</td>
-                    <td>{{制单人}}</td>
-                    <td>{{金额}}</td>
-                    <td>{{收货地址}}</td>
-                    <td>{{出库/发货}}</td>
-                    <td>{{审核状态}}</td>
-                    <td>{{付款状态}}</td>
-                    <td>{{qq}}</td>
-                    <td>{{邮箱}}</td>
+                <tr th:each="u:${users}" th:id="user-+${u.id}">
+                    <td th:text="${u.name}">{{客户名称}}</td>
+                    <td th:text="${u.id}">{{客户编码}}</td>
+                    <td th:text="${u.account}">{{登录账号}}</td>
+                    <td th:text="${u.contect}">{{联系人}}</td>
+                    <td th:text="${u.address}">{{地址}}</td>
+                    <td th:text="${u.rank}">{{级别}}</td>
+                    <td th:text="${u.tel}">{{电话}}</td>
+                    <td th:text="${u.email}">{{邮箱}}</td>
                     <td>
-                        <a href="#">修改</a>
-                        <a href="#">删除</a>
+                        <a href="#" data-toggle="modal" data-target="#change" id="change-1"
+                        onclick="showUser(this)">修改</a>
+                        <a href="#" id="del-1" onclick="delUser(this)">删除</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
             <hr style="color: #40E0D0">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        </div>
+    </div>
+</div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加客户</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" th:action="@{/sale-create-user}">
+                    <div class="form-group">
+                        <label for="c-username">客户名称</label>
+                        <input type="text" class="form-control" id="c-username" name="c-username" placeholder="客户名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="c-contect">联系人</label>
+                        <input type="text" class="form-control" id="c-contect" name="c-contect" placeholder="联系人">
+                    </div>
+                    <div class="form-group">
+                        <label for="c-rank">客户级别</label>
+                        <input type="text" class="form-control" id="c-rank" name="c-rank" placeholder="客户级别" list="user-rank">
+                    </div>
+                    <div class="form-group">
+                        <label for="c-address">地址</label>
+                        <input type="text" class="form-control" id="c-address" name="c-address" placeholder="地址">
+                    </div>
+                    <div class="form-group">
+                        <label for="c-tel">电话</label>
+                        <input type="text" class="form-control" id="c-tel" name="c-tel" placeholder="电话">
+                    </div>
+                    <div class="form-group">
+                        <label for="c-email">邮箱</label>
+                        <input type="text" class="form-control" id="c-email" name="c-email" placeholder="邮箱">
+                    </div>
+                    <button type="submit" class="btn btn-default">保存</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改客户</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" th:action="@{/sale-change-user}">
+                    <input type="hidden" id="ch-user-id">
+                    <div class="form-group">
+                        <label for="ch-username">客户名称</label>
+                        <input type="text" class="form-control" id="ch-username" placeholder="客户名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="ch-contect">联系人</label>
+                        <input type="text" class="form-control" id="ch-contect" placeholder="联系人">
+                    </div>
+                    <div class="form-group">
+                        <label for="ch-rank">客户级别</label>
+                        <input type="text" class="form-control" id="ch-rank" placeholder="客户级别" list="user-rank">
+                        <datalist id="user-rank">
+                            <option value="普通"></option>
+                            <option value="VIP"></option>
+                            <option value="SVIP"></option>
+                        </datalist>
+                    </div>
+                    <div class="form-group">
+                        <label for="ch-address">地址</label>
+                        <input type="text" class="form-control" id="ch-address" placeholder="地址">
+                    </div>
+                    <div class="form-group">
+                        <label for="ch-tel">电话</label>
+                        <input type="text" class="form-control" id="ch-tel" placeholder="电话">
+                    </div>
+                    <div class="form-group">
+                        <label for="ch-email">邮箱</label>
+                        <input type="text" class="form-control" id="ch-email" placeholder="邮箱">
+                    </div>
+                    <button type="submit" class="btn btn-default">保存</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -120,6 +181,34 @@
         crossorigin="anonymous"></script>
 <script src="../../static/js/index.js"></script>
 <script src="../../static/js/user/user.js"></script>
+<script>
+    function delUser(self){
+        var id = self.id.toString().charAt(self.id.toString().length-1);
+        $.ajax({
+            url:'/saleAjax/delUser',
+            type:'post',
+            data:'id='+id,
+            success:function (re) {
+                if(re==="success"){
+                    $("#user-"+id).hide();
+                }else{
+                    alert(re);
+                }
+            }
+        });
+    }
+    function showUser(self) {
+        var id = self.id.toString().charAt(self.id.toString().length-1);
+        var tdList = $('#user-'+id).children("td");
+        $('#ch-username').val(tdList[0].innerHTML);
+        $('#ch-contect').val(tdList[3].innerHTML);
+        $('#ch-address').val(tdList[4].innerHTML);
+        $('#ch-tel').val(tdList[6].innerHTML);
+        $('#ch-email').val(tdList[7].innerHTML);
+        $('#ch-rank').val(tdList[5].innerHTML);
+        $('#ch-user-id').val(tdList[1].innerHTML);
+    }
+</script>
 </body>
 
 </html>

@@ -28,21 +28,21 @@ public class IndexController {
             if ("user".equals(password)) {
                 return "redirect:/shopping";
             } else if ("sale".equals(password)) {
-                return "sale";
+                return "redirect:/sale";
             } else if ("account".equals(password)) {
-                return "finance-account";
+                return "redirect:/finance-account";
             } else if ("cashier".equals(password)) {
-                return "finance-cashier";
+                return "redirect:/finance-cashier";
             } else if ("pps".equals(password)) {
                 return "ProductionPlanningSection";
             } else if ("fpl".equals(password)) {
-                return "finishedProducLibrary";
+                return "redirect:/finishedProducLibrary";
             } else if ("boss".equals(password)) {
                 return "boss";
             } else if ("admin".equals(password)) {
                 return "redirect:/admin/index";
             } else if ("production".equals(password)) {
-                return "productionWork";
+                return "redirect:/production/work";
             } else return "login";
         } else {
             //登陆失败
