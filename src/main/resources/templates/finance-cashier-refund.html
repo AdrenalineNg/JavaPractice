@@ -45,16 +45,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{单号}}</td>
-                    <td>{{制单人}}</td>
-                    <td>{{金额}}</td>
-                    <td>{{收货地址}}</td>
-                    <td>{{出库/发货}}</td>
-                    <td>{{审核状态}}</td>
-                    <td>{{付款状态}}</td>
+                <tr th:each="p:${order}">
+                    <td th:text="${p.id}">{{单号}}</td>
+                    <td th:text="${p.sale}">{{制单人}}</td>
+                    <td th:text="${p.user}">{{客户}}</td>
+                    <td th:text="${p.money}">{{金额}}</td>
+                    <td th:text="${p.is_pay}">{{付款状态}}</td>
                     <td>
-                        <span style="margin-left: 10px;"><a href="#">确认</a></span>
+                        <span style="margin-left: 10px;"><a th:href="@{/cashier-confirm-refound/}+${p.id}">确认</a></span>
                     </td>
                 </tr>
                 </tbody>

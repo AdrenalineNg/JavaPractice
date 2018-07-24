@@ -35,49 +35,26 @@
                 <tr>
                     <td>单号</td>
                     <td>制单人</td>
+                    <td>客户</td>
                     <td>金额</td>
-                    <td>收货地址</td>
-                    <td>出库/发货</td>
-                    <td>审核状态</td>
                     <td>付款状态</td>
                     <td>操作</td>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{单号}}</td>
-                    <td>{{制单人}}</td>
-                    <td>{{金额}}</td>
-                    <td>{{收货地址}}</td>
-                    <td>{{出库/发货}}</td>
-                    <td>{{审核状态}}</td>
-                    <td>{{付款状态}}</td>
+                <tr th:each="p:${order}">
+                    <td th:text="${p.id}">{{单号}}</td>
+                    <td th:text="${p.sale}">{{制单人}}</td>
+                    <td th:text="${p.user}">{{客户}}</td>
+                    <td th:text="${p.money}">{{金额}}</td>
+                    <td th:text="${p.is_pay}">{{付款状态}}</td>
                     <td>
-                        <span style="margin-left: 10px;"><a href="#">确认</a></span>
+                        <span style="margin-left: 10px;"><a th:href="@{/cashier-confirm-order/}+${p.id}">确认</a></span>
                     </td>
                 </tr>
                 </tbody>
             </table>
             <hr style="color: #40E0D0">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
 
         </div>
     </div>
