@@ -34,7 +34,7 @@ public class IndexController {
             } else if ("cashier".equals(password)) {
                 return "redirect:/finance-cashier";
             } else if ("pps".equals(password)) {
-                return "ProductionPlanningSection";
+                return "redirect:pps";
             } else if ("fpl".equals(password)) {
                 return "redirect:/finishedProducLibrary";
             } else if ("boss".equals(password)) {
