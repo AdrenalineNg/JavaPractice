@@ -12,13 +12,14 @@ public class good {
     @Id
     @Column(name="g_id")
     private String g_id;
-    @Column(name="g_name")
+	@Column(name="g_name")
     private String g_name;
     @Column(name="g_price")
     private String g_price;
     @Column(name="g_img")
     private String g_img;
-	public String getG_id() {
+
+    public String getG_id() {
 		return g_id;
 	}
 	public void setG_id(String g_id) {

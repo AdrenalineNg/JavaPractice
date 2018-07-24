@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.trinityBakery.trinityBakery.dao.goodRepository;
+import com.trinityBakery.trinityBakery.dao.shoppingcartRepository;
 import com.trinityBakery.trinityBakery.model.good;
+import com.trinityBakery.trinityBakery.model.shoppingcart;
 
 
 
@@ -19,7 +21,8 @@ import com.trinityBakery.trinityBakery.model.good;
 public class userController {
 	@Autowired
 	private goodRepository goodrepository;
-
+	@Autowired
+	private shoppingcartRepository srepository;
 
 
     @RequestMapping(value = "/shopping",method = RequestMethod.GET)
@@ -29,10 +32,19 @@ public class userController {
         map.put("production", list);
         return "shopping";
     }
-
     
-    @RequestMapping("shoppingcart")
-    public String shoppingcart() {
+//    @RequestMapping(value = "/shoppingcart",method = RequestMethod.GET)    
+//    public List<shoppingcart> shoppingcart(Map<String, Object> map) {
+//    	List<shoppingcart> list = new ArrayList<shoppingcart>();
+//        list = srepository.findAll();
+//        map.put("shoppingcart", list);
+//        return list;
+//    }
+    @RequestMapping(value = "/shoppingcart",method = RequestMethod.GET)    
+    public String shoppingcart(Map<String, Object> map) {
+    	List<shoppingcart> list = new ArrayList<shoppingcart>();
+        list = srepository.findAll();
+        map.put("shoppingcart", list);
         return "shoppingcart";
     }
     
