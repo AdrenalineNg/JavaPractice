@@ -150,13 +150,13 @@
 
     function confirmCart() {
 
-        var total-money = $('#total-money').text();
+        var money = $('#total-money').text();
         var demo = $("#demo").val();
         var address = $('#address').val();
         if(address){
             $.ajax({
                 url:'/ajax/confirmCart',
-                data:"money="+total-money+'&demo='+demo+'&address='+address,
+                data:"money="+money+'&address='+address,
                 type:'post',
                 success:function (re) {
                     if(re==="success"){

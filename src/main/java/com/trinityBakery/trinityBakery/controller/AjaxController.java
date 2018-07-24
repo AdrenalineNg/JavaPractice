@@ -143,29 +143,32 @@ public class AjaxController {
         }
         return "success";
     }
+    
+    
     @PostMapping("/confirmCart")
     public String confirmCart(HttpServletRequest request){
         String money = request.getParameter("money");
-        String demo = request.getParameter("demo");
         String address = request.getParameter("address");
         //将购物车id为id的表改为订单
-        //删除购物车表单        int total=Integer.parseInt(money);
-        int total=Integer.parseInt(money);
+        //删除购物车表单       
         order od=new order();
         od.setOrder_id("20180003");
         od.setAddress(address);
         od.setChuku_fahuo("未出库");
         od.setIs_confirm("未审核");
         od.setIs_paid("未付款");
+        float total=Float.parseFloat(money);
         od.setTotalprice(total);
         try {
         	oRepository.save(od);
+        	rRepository.deleteAll();
         }
         catch(Exception e) {
-       	return "error";
+        	return "error";
         }
         return "success";
     }
+    
     @PostMapping("/addCart")
     public String addCart(HttpServletRequest request){
         String id = request.getParameter("id");
