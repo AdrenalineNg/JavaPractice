@@ -26,7 +26,7 @@ public class IndexController {
         if (!StringUtils.isEmpty(account)) {
             //登陆成功
             if ("user".equals(password)) {
-                return "shopping";
+                return "redirect:/shopping";
             } else if ("sale".equals(password)) {
                 return "sale";
             } else if ("account".equals(password)) {
