@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import com.trinityBakery.trinityBakery.dao.detailRepository;
 import com.trinityBakery.trinityBakery.dao.goodRepository;
 import com.trinityBakery.trinityBakery.dao.orderRepository;
 import com.trinityBakery.trinityBakery.dao.refundRepository;
 import com.trinityBakery.trinityBakery.dao.shoppingcartRepository;
+import com.trinityBakery.trinityBakery.model.detail;
 import com.trinityBakery.trinityBakery.model.good;
 import com.trinityBakery.trinityBakery.model.order;
 import com.trinityBakery.trinityBakery.model.refund;
@@ -31,7 +33,8 @@ public class userController {
 	private orderRepository orepository;
 	@Autowired
 	private refundRepository rrepository;
-	
+	@Autowired
+	private detailRepository drepository;
 
     @RequestMapping(value = "/shopping",method = RequestMethod.GET)
     public String shoppingxianshi(Map<String, Object> map) {
@@ -70,11 +73,16 @@ public class userController {
 //      map.put("order", list);
 //      return list;
 //  }
-    
-    @RequestMapping("/user-order-detail/{id}")
-    public String user_order_detail(@PathVariable("id") Integer id) {
+ 
+    @RequestMapping(value = "/user-order-detail/{id}",method = RequestMethod.GET)    
+    public String user_order_detail(Map<String, Object> map1,Map<String, Object> map2) {
         //通过id 查询订单详情
-        System.out.print(id);
+    	List<detail> list1 = new ArrayList<detail>();
+        list1 = drepository.findAll();
+    	order od = new order();
+        od = orepository.getOne("20180003");
+        map1.put("detail", list1);
+        map2.put("order", od);
         return "user-order-detail";
     }
     

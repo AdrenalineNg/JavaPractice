@@ -1,19 +1,41 @@
 package com.trinityBakery.trinityBakery.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.hibernate.validator.constraints.pl.REGON;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.trinityBakery.trinityBakery.dao.orderRepository;
+import com.trinityBakery.trinityBakery.dao.refundRepository;
+import com.trinityBakery.trinityBakery.model.good;
+import com.trinityBakery.trinityBakery.model.order;
+import com.trinityBakery.trinityBakery.model.refund;
 
 
 @Controller
 
 public class saleController {    
-    @RequestMapping("sale")
-    public String sale() {
+	
+	@Autowired
+	private orderRepository orepository;
+	@Autowired
+	private refundRepository rrepository;
+	
+
+	@RequestMapping(value = "/sale",method = RequestMethod.GET)
+    public String sale(Map<String, Object> map) {
+		List<order> list = new ArrayList<order>();
+        list = orepository.findAll();
+        map.put("order", list);
         return "sale";
     }
     
@@ -28,8 +50,11 @@ public class saleController {
         return "sale-order-detail";
     }
     
-    @RequestMapping("sale-refund")
-    public String sale_refund() {
+	@RequestMapping(value = "/sale-refund",method = RequestMethod.GET)
+    public String sale_refund(Map<String, Object> map) {
+    	List<refund> list = new ArrayList<refund>();
+        list = rrepository.findAll();
+        map.put("refund", list);
         return "sale-refund";
     }
     

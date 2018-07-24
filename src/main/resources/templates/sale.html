@@ -49,15 +49,15 @@
                 </thead>
                 <tbody>
                 <tr th:each="p:${order}">
-                    <td th:text="p.o_id">{{单号}}</td>
-                    <td th:text="p.o_sales">{{制单人}}</td>
-                    <td th:text="p.o_money">{{金额}}</td>
-                    <td th:text="p.o_address">{{收货地址}}</td>
-                    <td th:text="p.o_delivered">{{出库/发货}}</td>
-                    <td th:text="p.o_aduit">{{审核状态}}</td>
-                    <td th:text="p.o_pay">{{付款状态}}</td>
+                    <td th:text="${p.order_id}">{{单号}}</td>
+                    <td th:text="${p.salesperson}">{{制单人}}</td>
+                    <td th:text="${p.totalprice}">{{金额}}</td>
+                    <td th:text="${p.address}">{{收货地址}}</td>
+                    <td th:text="${p.chuku_fahuo}">{{出库/发货}}</td>
+                    <td th:text="${p.is_confirm}">{{审核状态}}</td>
+                    <td th:text="${p.is_paid}">{{付款状态}}</td>
                     <td>
-                        <span style="margin-left: 10px;"><a href="#" th:href="@{/sale-order-detail}+${p.o_id}">详情</a></span>
+                        <span style="margin-left: 10px;"><a href="#" th:href="@{/sale-order-detail}+${p.order_id}">详情</a></span>
                     </td>
                 </tr>
                 </tbody>
