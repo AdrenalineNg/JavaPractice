@@ -16,23 +16,7 @@
 <div class="main">
     <div th:insert="~{Admin::topbar}"></div>
     <div class="statck-nav">
-        <ul class="nav nav-pills nav-stacked">
-            <li role="presentation">
-                <a href="#"th:href="@{/boss}">订单</a>
-            </li>
-            <li role="presentation">
-                <a href="#"th:href="@{/boss-refund}">退款单</a>
-            </li>
-            <li role="presentation" class="active">
-                <a href="#"th:href="@{/boss-restorhouse}">库存</a>
-            </li>
-            <li role="presentation">
-                <a href="#"th:href="@{/boss-plan}">生产计划</a>
-            </li>
-            <li role="presentation">
-                <a href="#"th:href="@{/boss-moneylist}">账单</a>
-            </li>
-        </ul>
+        <div th:replace="~{boss::bossBar}"></div>
     </div>
     <div class="item-detail">
         <h3>库存</h3>
@@ -43,43 +27,23 @@
 
         </div>
         <div class="item-detail-main">
-            <div class="row">
+            <div class="row" th:each="p:${production}">
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <img src="../../static/img/1.jpg" alt="...">
+                        <img th:src="${p.img}" alt="...">
                         <div class="caption">
                             <div class="form-group">
-                                <label>名称：{{name}}}</label>
+                                <label>名称：<span th:text="${p.name}">{{name}}</span></label>
                                 <br>
-                                <label>数量：{{number}}}</label>
+                                <label>数量：<span th:text="${p.num}">{{number}}</span></label>
                                 <br>
-                                <label>入库时间：{{date}}</label>
+                                <label>入库时间：<span th:text="${p.date}">{{date}}</span></label>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <hr style="color: #40E0D0">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
         </div>
     </div>
 </div>
