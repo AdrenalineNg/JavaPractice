@@ -45,15 +45,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="p:${orders}">
-                    <td th:text="${p.id}">{{单号}}</td>
-                    <td th:text="${p.sale}">{{销售}}</td>
-                    <td th:text="${p.money}">{{金额}}</td>
-                    <td th:text="${p.address}">{{订单}}</td>
-                    <td th:text="${p.chuhuo}">{{客户}}</td>
-                    <td th:text="${p.is_pay}">{{付款状态}}</td>
+                <tr th:each="p:${refund}">
+                    <td th:text="${p.refund_id}">{{单号}}</td>
+                    <td th:text="${p.salesperson}">{{销售}}</td>
+                    <td th:text="${p.totalprice}">{{金额}}</td>
+                    <td th:text="${p.order_id}">{{订单}}</td>
+                    <td th:text="${user}">{{客户}}</td>
+                    <td th:text="${p.is_paid}">{{付款状态}}</td>
                     <td>
-                        <span style="margin-left: 10px;"><a th:href="@{/account-confirm-refound/}+${p.id}">确认</a></span>
+                        <span style="margin-left: 10px;"><a th:href="@{/account-confirm-refound/}+${p.refund_id}">确认</a></span>
                     </td>
                 </tr>
                 </tbody>

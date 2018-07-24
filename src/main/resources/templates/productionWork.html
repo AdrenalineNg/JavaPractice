@@ -42,9 +42,9 @@
                 </thead>
                 <tbody>
                 <tr th:each="p:${plan}">
-                    <td th:text="${p.name}">{{商品名称}}</td>
-                    <td th:text="${p.num}">{{商品数量}}</td>
-                    <td th:text="${p.date}">{{生产日期}}</td>
+                    <td th:text="${p.p_name}">{{商品名称}}</td>
+                    <td th:text="${p.quantity}">{{商品数量}}</td>
+                    <td th:text="${p.p_date}">{{生产日期}}</td>
                 </tr>
                 </tbody>
             </table>

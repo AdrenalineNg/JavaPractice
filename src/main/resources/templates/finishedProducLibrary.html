@@ -45,14 +45,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="t:${froms}">
-                    <td th:text="${t.id}">{{单号}}</td>
-                    <td th:text="${t.accounter}">{{会计}}</td>
-                    <td th:text="${t.money}">{{金额}}</td>
+                <tr th:each="t:${tihuo}">
+                    <td th:text="${t.tihuo_id}">{{单号}}</td>
+                    <td th:text="${t.accountant}">{{会计}}</td>
+                    <td th:text="${t.totalprice}">{{金额}}</td>
                     <td th:text="${t.address}">{{收货地址}}</td>
-                    <td th:text="${t.is_out}">{{提货状态}}</td>
+                    <td th:text="${t.tihuo}">{{提货状态}}</td>
                     <td>
-                        <span style="margin-left: 10px;"><a th:href="@{/fpl-change/}+${t.id}">提货</a></span>
+                        <span style="margin-left: 10px;"><a th:href="@{/fpl-change/}+${t.tihuo_id}">提货</a></span>
                     </td>
                 </tr>
                 </tbody>

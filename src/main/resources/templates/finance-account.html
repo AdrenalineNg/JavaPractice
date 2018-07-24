@@ -45,16 +45,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="p:${orders}">
-                    <td th:text="${p.id}">{{单号}}</td>
-                    <td th:text="${p.sales}">{{销售}}</td>
-                    <td th:text="${p.user}">{{客户}}</td>
-                    <td th:text="${p.money}">{{金额}}</td>
+                <tr th:each="p:${order}">
+                    <td th:text="${p.order_id}">{{单号}}</td>
+                    <td th:text="${p.salesperson}">{{销售}}</td>
+                    <td th:text="${user}">{{客户}}</td>
+                    <td th:text="${p.totalprice}">{{金额}}</td>
                     <td th:text="${p.address}">{{收货地址}}</td>
-                    <td th:text="${p.confirm}">{{会计审核状态}}</td>
-                    <td th:text="${p.is_pay}">{{付款状态}}</td>
+                    <td th:text="${p.is_confirm}">{{会计审核状态}}</td>
+                    <td th:text="${p.is_paid}">{{付款状态}}</td>
                     <td>
-                        <span style="margin-left: 10px;"><a th:href="@{/account-confirm/}+${p.id}">确认</a></span>
+                        <span style="margin-left: 10px;"><a th:href="@{/account-confirm/}+${p.order_id}">确认</a></span>
                     </td>
                 </tr>
                 </tbody>
