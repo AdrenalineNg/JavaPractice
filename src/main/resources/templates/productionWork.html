@@ -41,76 +41,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{商品名称}}</td>
-                    <td>{{商品数量}}</td>
-                    <td>{{生产日期}}</td>
+                <tr th:each="p:${plan}">
+                    <td th:text="${p.name}">{{商品名称}}</td>
+                    <td th:text="${p.num}">{{商品数量}}</td>
+                    <td th:text="${p.date}">{{生产日期}}</td>
                 </tr>
                 </tbody>
             </table>
             <hr style="color: #40E0D0">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
 
         </div>
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">新增计划</h4>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <label for="select-pro">选择商品</label>
-                    <input type="text" id="select-pro" list="pro-list">
-                    <datalist id="pro-list">
-                        <option value="p1">
-                        <option value="p2">
-                        <option value="p3">
-                    </datalist>
-                </div>
-
-                <div>
-                    <label for="num-pro">请输入数量</label>
-                    <input type="text" id="num-pro">
-                </div>
-
-                <div>
-                    <label for="date-pro">请选择生产日期</label>
-                    <input type="date" id="date-pro">
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">添加</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"

@@ -5,11 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("production")
+@RequestMapping("/production")
 public class ProductionController {
     
-    @RequestMapping("work")
+    @RequestMapping("/work")
     public String productionwork() {
+        //生产车间所能看见的生产计划
         return "productionWork";
     }
 
