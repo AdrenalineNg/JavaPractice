@@ -1,17 +1,24 @@
 package com.trinityBakery.trinityBakery.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.trinityBakery.trinityBakery.dao.adminRepository;
+import com.trinityBakery.trinityBakery.dao.detailRepository;
 import com.trinityBakery.trinityBakery.dao.goodRepository;
 import com.trinityBakery.trinityBakery.dao.orderRepository;
 import com.trinityBakery.trinityBakery.dao.shoppingcartRepository;
 import com.trinityBakery.trinityBakery.model.admin;
+import com.trinityBakery.trinityBakery.model.detail;
 import com.trinityBakery.trinityBakery.model.good;
 import com.trinityBakery.trinityBakery.model.order;
 import com.trinityBakery.trinityBakery.model.shoppingcart;
+
 
 @RestController
 @RequestMapping(value = "/ajax")
@@ -25,6 +32,8 @@ public class AjaxController {
     private shoppingcartRepository rRepository;
 	@Autowired
     private orderRepository oRepository;
+	@Autowired
+    private detailRepository dRepository;
 	
     @RequestMapping(value = "/createAdmin", method = RequestMethod.POST)
     @ResponseBody
@@ -159,9 +168,19 @@ public class AjaxController {
         od.setIs_paid("未付款");
         float total=Float.parseFloat(money);
         od.setTotalprice(total);
+        oRepository.save(od);
+    	List<shoppingcart> sc=new ArrayList<shoppingcart>();
+    	sc = rRepository.findAll();
+    	List<detail>dt =new ArrayList<detail>();
         try {
-        	oRepository.save(od);
+        	for(shoppingcart eachsc:sc) {
+        		detail d=new detail();
+        		BeanUtils.copyProperties(eachsc,d);
+        		dt.add(d);
+        	}
+        	dRepository.saveAll(dt);
         	rRepository.deleteAll();
+        	
         }
         catch(Exception e) {
         	return "error";
