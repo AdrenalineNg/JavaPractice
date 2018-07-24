@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.trinityBakery.trinityBakery.dao.adminRepository;
 import com.trinityBakery.trinityBakery.dao.goodRepository;
+import com.trinityBakery.trinityBakery.dao.shoppingcartRepository;
 import com.trinityBakery.trinityBakery.model.admin;
 
 @RestController
@@ -16,6 +17,9 @@ public class AjaxController {
     private adminRepository aRepository;
 	@Autowired
     private goodRepository gRepository;
+	@Autowired
+    private shoppingcartRepository sRepository;
+
     @RequestMapping(value = "/createAdmin", method = RequestMethod.POST)
     @ResponseBody
     public String createAdmin(HttpServletRequest request){
@@ -114,19 +118,6 @@ public class AjaxController {
         String number = request.getParameter("number");
         //将商品id为id的加入购物车
         //数量为number
-        return "success";
-    }
-    @PostMapping("/confirmReceipt")
-    public  String confirmReceipt(HttpServletRequest request){
-        String id = request.getParameter("id");
-        //根据订单id 修改收货状态
-        return "success";
-    }
-
-    @PostMapping("/confirmRefound")
-    public  String confirmRefound(HttpServletRequest request){
-        String id = request.getParameter("id");
-        //根据订单id 修改确认退款
         return "success";
     }
 }

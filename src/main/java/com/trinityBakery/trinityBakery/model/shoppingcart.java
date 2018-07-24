@@ -18,6 +18,12 @@ public class shoppingcart {
     private String c_price;
     @Column(name="c_img")
     private String c_img;
+	@Column(name="c_weight")
+    private String c_weight;
+    @Column(name="c_num")
+    private String c_num;
+    @Column(name="c_money")
+    private String c_money;
     public String getC_id() {
 		return c_id;
 	}
@@ -48,6 +54,17 @@ public class shoppingcart {
 	public void setC_weight(String c_weight) {
 		this.c_weight = c_weight;
 	}
-	@Column(name="c_weight")
-    private String c_weight;
+	public String getC_num() {
+		return c_num;
+	}
+	public void setC_num(String c_num) {
+		this.c_num = c_num;
+	}
+	public String getC_money() {
+		return c_money;
+	}
+	public void setC_money(String c_money) {
+		this.c_money = c_money;
+	}
+
 }
