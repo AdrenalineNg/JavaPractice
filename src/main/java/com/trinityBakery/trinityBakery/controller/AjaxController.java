@@ -116,4 +116,17 @@ public class AjaxController {
         //数量为number
         return "success";
     }
+    @PostMapping("/confirmReceipt")
+    public  String confirmReceipt(HttpServletRequest request){
+        String id = request.getParameter("id");
+        //根据订单id 修改收货状态
+        return "success";
+    }
+
+    @PostMapping("/confirmRefound")
+    public  String confirmRefound(HttpServletRequest request){
+        String id = request.getParameter("id");
+        //根据订单id 修改确认退款
+        return "success";
+    }
 }
