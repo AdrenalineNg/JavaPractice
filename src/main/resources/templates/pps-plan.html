@@ -52,13 +52,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{商品名称}}</td>
-                    <td>{{商品数量}}</td>
-                    <td>{{生产日期}}</td>
+                <tr th:each="p:${plan}">
+                    <td th:text="${p.name}">{{商品名称}}</td>
+                    <td th:text="${p.num}">{{商品数量}}</td>
+                    <td th:text="${p.date}">{{生产日期}}</td>
                     <td>
-                        <a href="#" data-toggle="modal" data-target="#myModal">修改</a>
-                        <a href="#">删除</a>
+                        <a href="#" data-toggle="modal" th:id="${p.id}" onclick="showid(this)" data-target="#change">修改</a>
+                        <a th:href="@{/del-plan/}+${p.id}">删除</a>
                     </td>
                 </tr>
                 </tbody>
@@ -77,32 +77,70 @@
                 </button>
                 <h4 class="modal-title" id="myModalLabel">新增计划</h4>
             </div>
+            <form th:action="@{/create-plan}" method="post">
             <div class="modal-body">
                 <div>
                     <label for="select-pro">选择商品</label>
-                    <input type="text" id="select-pro" list="pro-list">
+                    <input type="text" id="select-pro" list="pro-list" name="name">
                     <datalist id="pro-list">
-                        <option value="p1">
-                        <option value="p2">
-                        <option value="p3">
+                        <option value="千层蛋糕盒子（抹茶豆乳草莓奶油）">
+                        <option value="抹茶红豆乳酪软欧包">
+                        <option value="安德莉亚巧克力曲奇">
+                        <option value="奶茶咸奶盖珍珠蛋糕">
+                        <option value="奶酥草莓乳酪软欧包">
                     </datalist>
                 </div>
 
                 <div>
                     <label for="num-pro">请输入数量</label>
-                    <input type="text" id="num-pro">
+                    <input type="text" id="num-pro" name="num">
                 </div>
 
                 <div>
                     <label for="date-pro">请选择生产日期</label>
-                    <input type="date" id="date-pro">
+                    <input type="date" id="date-pro" name="date">
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">添加</button>
+                <button type="submit" class="btn btn-primary">添加</button>
             </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" >新增计划</h4>
+            </div>
+            <form th:action="@{/create-plan}" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="p-id" id="p-id">
+                    <div>
+                        <label for="select-pro">选择商品</label>
+                        <input type="text" list="pro-list" name="c-name">
+
+                    </div>
+
+                    <div>
+                        <label for="num-pro">请输入数量</label>
+                        <input type="text"  name="c-num">
+                    </div>
+
+                    <div>
+                        <label for="date-pro">请选择生产日期</label>
+                        <input type="date"  name="c-date">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -113,6 +151,12 @@
         crossorigin="anonymous"></script>
 <script src="../../static/js/index.js"></script>
 <script src="../../static/js/user/shopping.js"></script>
+<script>
+    function showid(self) {
+        var id = self.id;
+        $("#p-id").val(id);
+    }
+</script>
 </body>
 
 </html>

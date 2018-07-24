@@ -72,30 +72,6 @@
                 </table>
                 </table>
             </div>
-            <div class="form-info">
-                <span>金额：<span id="total-money"></span></span>
-                <br>
-                <span>商品数量：<span id="total-num"></span></span>
-                <button class="btn btn-primary" style="float:right;margin-bottom: 5px;"
-                        type="submit" onclick="salesConfirmOrder()">确认订单
-                </button>
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td>备注：<span th:text="${o_demo}">{{备注}}</span></td>
-                    </tr>
-                    <tr>
-                        <td>收货人信息：<span th:text="${o_user}">{{收货人信息}}</span></td>
-                    </tr>
-                    <tr>
-                        <td>制单人：<span th:text="${o_sale}">{{制单人}}</span></td>
-                    </tr>
-                    <tr>
-                        <td>日期：<span th:text="${o_date}">{{日期}}</span></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
             <button class="btn btn-default" onclick="window.history.back()" style="float:right;margin: 0 10px 10px 0;"
                     type="submit">返回
             </button>
@@ -109,38 +85,6 @@
         crossorigin="anonymous"></script>
 <script src="../../static/js/index.js"></script>
 <script src="../../static/js/user/user.js"></script>
-<script>
-    function salesConfirmOrder() {
-        var id = $('#cartId').text();
-        $.ajax({
-            url: '/saleAjax/salesConfirmOrder',
-            data: "id=" + id,
-            type: 'post',
-            success: function (re) {
-                if (re === "success") {
-                    window.history.back()
-                } else {
-                    alert("error");
-                }
-            }
-        });
-
-    }
-
-    /* 初始化 总金额 等数据*/
-    var trList = $('#t_body').children("tr");
-    var _totalNum = 0;
-    var _totalMoney = 0;
-    for (var i = 0; i < trList.length; i++) {
-        var ids = trList[i].id;
-        var num = $('#' + ids + '-num').text();
-        var money = $('#' + ids + '-money').text();
-        _totalNum += parseInt(num);
-        _totalMoney += parseInt(money);
-    }
-    $('#total-num').text(_totalNum);
-    $('#total-money').text(_totalMoney);
-</script>
 </body>
 
 </html>
