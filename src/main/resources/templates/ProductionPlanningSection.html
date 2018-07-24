@@ -16,11 +16,8 @@
     <div th:insert="~{Admin::topbar}"></div>
     <div class="statck-nav">
         <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="active">
-                <a href="#"th:href="@{/pps}">订单</a>
-            </li>
             <li role="presentation">
-                <a href="#"th:href="@{/pps-refund}">退款单</a>
+                <a href="#"th:href="@{/pps}">订单</a>
             </li>
             <li role="presentation">
                 <a href="#"th:href="@{/pps-restorhous}">库存</a>
@@ -43,51 +40,24 @@
                 <thead>
                 <tr>
                     <td>单号</td>
-                    <td>制单人</td>
+                    <td>客户</td>
                     <td>金额</td>
-                    <td>收货地址</td>
-                    <td>出库/发货</td>
-                    <td>审核状态</td>
-                    <td>付款状态</td>
                     <td>操作</td>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{单号}}</td>
-                    <td>{{制单人}}</td>
-                    <td>{{金额}}</td>
-                    <td>{{收货地址}}</td>
-                    <td>{{出库/发货}}</td>
-                    <td>{{审核状态}}</td>
-                    <td>{{付款状态}}</td>
+                <tr th:each="p:${production}">
+                    <td th:text="${p.id}">{{单号}}</td>
+                    <td th:text="${p.id}">{{制单人}}</td>
+                    <td th:text="${p.id}">{{客户}}</td>
+                    <td th:text="${p.id}">{{金额}}</td>
                     <td>
-                        <span style="margin-left: 10px;"><a href="#">详情</a></span>
+                        <span style="margin-left: 10px;"><a th:href="@{/pps-order-view/}+${p.id}">详情</a></span>
                     </td>
                 </tr>
                 </tbody>
             </table>
             <hr style="color: #40E0D0">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
         </div>
     </div>
 </div>
