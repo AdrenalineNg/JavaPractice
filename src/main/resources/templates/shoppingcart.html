@@ -50,17 +50,17 @@
                     </tr>
                     </thead>
                     <tbody id="t_body">
-                        <tr id="p-1" th:each="p:${shoppingcart}">
+                        <tr  th:each="p:${shoppingcart}" th:id="p-+${p.c_id}">
                             <td><img  th:src="${p.c_img}" alt=""></td>
                             <td id = "cartId" th:text="${p.c_id}">{{id}}</td>
                             <td th:text="${p.c_name}">{{商品名称}}</td>
                             <td th:text="${p.c_weight}">{{规格}}</td>
-                            <td id="p-1-price" th:text="${p.c_price}">5</td>
-                            <td id="p-1-num" th:text="${p.c_num}">1</td>
-                            <td id="p-1-money" th:text="${p.c_money}">5</td>
+                            <td th:id="p-+${p.c_id}+-price" th:text="${p.c_price}">5</td>
+                            <td th:id="p-+${p.c_id}+-num" th:text="${p.c_num}">1</td>
+                            <td th:id="p-+${p.c_id}+-money" th:text="${p.c_money}">5</td>
                             <td>
-                                <button id="AddBtn-1" onclick="AddNumber(this)">+</button>
-                                <button id="ReduceBtn-1" onclick="ReduceNumber(this)">-</button>
+                                <button th:id="AddBtn-+${p.c_id}" onclick="AddNumber(this)">+</button>
+                                <button th:id="ReduceBtn-+${p.c_id}" onclick="ReduceNumber(this)">-</button>
                             </td>
                         </tr>
                     </tbody>
@@ -98,33 +98,56 @@
         var id = self.id.toString().charAt(self.id.toString().length-1);
         var num = $('#p-'+id+'-num').text();
         var price = $('#p-'+id+'-price').text();
-        var money = parseInt(price)*(parseInt(num)+1);
+        var money = (Number(price)*(Number(num)+1)).toFixed(2);
         var totalNum = $('#total-num').text();
         var totalMoney = $('#total-money').text();
-        $('#total-num').text(parseInt(totalNum)+1);
-        $('#total-money').text(parseInt(totalMoney)+parseInt(price));
-        $('#p-'+id+'-num').text(parseInt(num)+1);
+        $('#total-num').text(Number(totalNum)+1);
+        $('#total-money').text((Number(totalMoney)+Number(price)).toFixed(2));
+        $('#p-'+id+'-num').text(Number(num)+1);
         $('#p-'+id+'-money').text(money);
+        $.ajax({
+            url:'/ajax/addNumber',
+            data:"id="+id,
+            type:'post',
+            success:function (re) {
+                if(re==="success"){
+
+                }else{
+                    alert("error");
+                }
+            }
+        });
     }
     function ReduceNumber(self){
         var id = self.id.toString().charAt(self.id.toString().length-1);
         var num = $('#p-'+id+'-num').text();
         var price = $('#p-'+id+'-price').text();
-        var money = parseInt(price)*(parseInt(num)-1);
+        var money = (Number(price)*(Number(num)-1)).toFixed(2);
         var totalNum = $('#total-num').text();
         var totalMoney = $('#total-money').text();
-        $('#total-num').text(parseInt(totalNum)-1);
-        $('#total-money').text(parseInt(totalMoney)-parseInt(price));
-        $('#p-'+id+'-num').text(parseInt(num)-1);
+        $('#total-num').text(Number(totalNum)-1);
+        $('#total-money').text((Number(totalMoney)-Number(price)).toFixed(2));
+        $('#p-'+id+'-num').text(Number(num)-1);
         $('#p-'+id+'-money').text(money);
-        if(parseInt(num)-1==0){
+        if((Number(num)-1).toFixed(2)==0){
             delPro(id);
         }
+        $.ajax({
+            url:'/ajax/reduceNumber',
+            data:"id="+id,
+            type:'post',
+            success:function (re) {
+                if(re==="success"){
+                }else{
+                    alert("error");
+                }
+            }
+        });
     }
     function delPro(id) {
         $('#p-'+id).hide();
     }
-    
+
     function confirmCart() {
 
         var id = $('#cartId').text();
@@ -151,13 +174,13 @@
     /* 初始化 总金额 等数据*/
     var trList = $('#t_body').children("tr");
     var _totalNum = 0;
-    var _totalMoney = 0;
+    var _totalMoney = 0.0;
     for (var i=0;i<trList.length;i++) {
         var ids = trList[i].id;
         var num = $('#'+ids+'-num').text();
         var money = $('#'+ids+'-money').text();
-        _totalNum +=parseInt(num);
-        _totalMoney+=parseInt(money);
+        _totalNum += Number(num);
+        _totalMoney += (parseFloat(money));
     }
     $('#total-num').text(_totalNum);
     $('#total-money').text(_totalMoney);
