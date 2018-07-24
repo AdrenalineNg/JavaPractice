@@ -40,18 +40,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="p:${prodduction}">
-                    <td th:text="${p.r_id}">{{单号}}</td>
-                    <td th:text="${p.r_sales}">{{制单人}}</td>
-                    <td th:text="${p.r_totalMoney}">{{金额}}</td>
-                    <td th:text="${p.r_order}">{{订单号}}}</td>
-                    <td th:text="${p.r_audit}">{{审核状态}}</td>
-                    <td th:text="${p.r_pay}">{{退款状态}}</td>
+                <tr th:each="p:${refund}">
+                    <td th:text="${p.refund_id}">{{单号}}</td>
+                    <td th:text="${p.salesperson}">{{制单人}}</td>
+                    <td th:text="${p.totalprice}">{{金额}}</td>
+                    <td th:text="${p.order_id}">{{订单号}}}</td>
+                    <td th:text="${p.is_confirm}">{{审核状态}}</td>
+                    <td th:text="${p.is_paid}">{{退款状态}}</td>
                     <td>
                         <!--这里渲染订单id-->
-                        <button class="btn btn-default" type="submit" th:id="${p.r_id}" onclick="confirmRefound(this)"
-                                th:disabled="${p.r_pay}? #{true} : #{false}">确认收款</button>
-                        <span style="margin-left: 10px;"><a href="#" th:href="@{/user-refund-detail/} + ${p.r_id}">详情</a></span>
+                        <button class="btn btn-default" type="submit" th:id="${p.refund_id}" onclick="confirmRefound(this)"
+                                >确认收款</button>
+                        <span style="margin-left: 10px;"><a href="#" th:href="@{/user-refund-detail/} + ${p.refund_id}">详情</a></span>
                     </td>
                 </tr>
                 </tbody>

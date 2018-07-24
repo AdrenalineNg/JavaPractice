@@ -15,11 +15,19 @@ public class good {
 	@Column(name="g_name")
     private String g_name;
     @Column(name="g_price")
-    private String g_price;
+    private float g_price;
     @Column(name="g_img")
     private String g_img;
-
-    public String getG_id() {
+    @Column(name="g_weight")
+    private String g_weight;
+    
+    public String getG_weight() {
+		return g_weight;
+	}
+	public void setG_weight(String g_weight) {
+		this.g_weight = g_weight;
+	}
+	public String getG_id() {
 		return g_id;
 	}
 	public void setG_id(String g_id) {
@@ -31,10 +39,10 @@ public class good {
 	public void setG_name(String g_name) {
 		this.g_name = g_name;
 	}
-	public String getG_price() {
+	public float getG_price() {
 		return g_price;
 	}
-	public void setG_price(String g_price) {
+	public void setG_price(float g_price) {
 		this.g_price = g_price;
 	}
 	public String getG_img() {
