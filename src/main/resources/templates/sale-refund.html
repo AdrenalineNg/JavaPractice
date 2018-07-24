@@ -40,8 +40,6 @@
                     <td>单号</td>
                     <td>制单人</td>
                     <td>金额</td>
-                    <td>收货地址</td>
-                    <td>出库/发货</td>
                     <td>审核状态</td>
                     <td>付款状态</td>
                     <td>操作</td>
@@ -49,13 +47,11 @@
                 </thead>
                 <tbody>
                 <tr th:each="p:${order}">
-                    <td th:text="p.o_id">{{单号}}</td>
-                    <td th:text="p.o_sales">{{制单人}}</td>
-                    <td th:text="p.o_money">{{金额}}</td>
-                    <td th:text="p.o_address">{{收货地址}}</td>
-                    <td th:text="p.o_delivered">{{出库/发货}}</td>
-                    <td th:text="p.o_aduit">{{审核状态}}</td>
-                    <td th:text="p.o_pay">{{付款状态}}</td>
+                    <td th:text="${p.o_id}">{{单号}}</td>
+                    <td th:text="${p.o_sales}">{{制单人}}</td>
+                    <td th:text="${p.o_money}">{{金额}}</td>
+                    <td th:text="${p.o_aduit}">{{审核状态}}</td>
+                    <td th:text="${p.o_pay}">{{付款状态}}</td>
                     <td>
                         <span style="margin-left: 10px;"><a href="#"th:href="@{/sale-refund-detail}+${p.o_id}">详情</a></span>
                     </td>

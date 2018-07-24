@@ -38,7 +38,7 @@ public class IndexController {
             } else if ("fpl".equals(password)) {
                 return "redirect:/finishedProducLibrary";
             } else if ("boss".equals(password)) {
-                return "boss";
+                return "redirect:/boss/boss";
             } else if ("admin".equals(password)) {
                 return "redirect:/admin/index";
             } else if ("production".equals(password)) {
