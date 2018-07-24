@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.trinityBakery.trinityBakery.dao.adminRepository;
+import com.trinityBakery.trinityBakery.dao.goodRepository;
 import com.trinityBakery.trinityBakery.model.admin;
 
 @RestController
@@ -13,6 +14,8 @@ public class AjaxController {
 
 	@Autowired
     private adminRepository aRepository;
+	@Autowired
+    private goodRepository gRepository;
     @RequestMapping(value = "/createAdmin", method = RequestMethod.POST)
     @ResponseBody
     public String createAdmin(HttpServletRequest request){

@@ -25,8 +25,6 @@ public class adminController {
     public String finishedProducLibrary(Map<String, Object> map) {
         List<admin> list = new ArrayList<admin>();
         list = aRepository.findAll();
-        System.out.print(list);
-        System.out.print(123);
         map.put("admin", list);
         return "Admin";
     }
