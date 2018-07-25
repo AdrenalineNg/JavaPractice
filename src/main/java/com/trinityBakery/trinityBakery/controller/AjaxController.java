@@ -3,21 +3,12 @@ package com.trinityBakery.trinityBakery.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.trinityBakery.trinityBakery.dao.*;
+import com.trinityBakery.trinityBakery.model.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import com.trinityBakery.trinityBakery.dao.adminRepository;
-import com.trinityBakery.trinityBakery.dao.detailRepository;
-import com.trinityBakery.trinityBakery.dao.goodRepository;
-import com.trinityBakery.trinityBakery.dao.orderRepository;
-import com.trinityBakery.trinityBakery.dao.shoppingcartRepository;
-import com.trinityBakery.trinityBakery.model.admin;
-import com.trinityBakery.trinityBakery.model.detail;
-import com.trinityBakery.trinityBakery.model.good;
-import com.trinityBakery.trinityBakery.model.order;
-import com.trinityBakery.trinityBakery.model.shoppingcart;
 
 
 @RestController
@@ -34,7 +25,9 @@ public class AjaxController {
     private orderRepository oRepository;
 	@Autowired
     private detailRepository dRepository;
-	
+    @Autowired
+    private refundRepository rrepository;
+
     @RequestMapping(value = "/createAdmin", method = RequestMethod.POST)
     @ResponseBody
     public String createAdmin(HttpServletRequest request){
@@ -215,4 +208,30 @@ public class AjaxController {
         }
         return "success";
     }
+
+    @PostMapping("/cashier-confirm-order")
+    public String cashierConfirmOrder(HttpServletRequest request){
+        String id = request.getParameter("id");
+        System.out.println(id);
+        //出纳改变订单付款状态
+        order od=new order();
+        od=oRepository.getOne(id);
+        od.setIs_paid("已付款");
+        oRepository.save(od);
+        return "success";
+    }
+
+    @RequestMapping("/cashier-confirm-refound")
+    public String cashierConfirmRefound(HttpServletRequest request){
+        String id = request.getParameter("id");
+        System.out.println(id);
+        //出纳更改订单的退款状态
+        refund rf=new refund();
+        rf=rrepository.getOne(id);
+        rf.setIs_paid("已退款");
+        rrepository.save(rf);
+
+        return "success";
+    }
+
 }

@@ -49,7 +49,7 @@
                     <td th:text="${p.totalprice}">{{金额}}</td>
                     <td th:text="${p.is_paid}">{{付款状态}}</td>
                     <td>
-                        <span style="margin-left: 10px;"><a th:href="@{/cashier-confirm-order/}+${p.order_id}">确认</a></span>
+                        <span style="margin-left: 10px;"><a th:id="or-+${p.order_id}" onclick="cashierConfirmOrder(this)">确认</a></span>
                     </td>
                 </tr>
                 </tbody>
@@ -66,6 +66,19 @@
         crossorigin="anonymous"></script>
 <script src="../../static/js/index.js"></script>
 <script src="../../static/js/user/user.js"></script>
+<script>
+    function cashierConfirmOrder(self) {
+        var id = self.id.toString().substring(3);
+        $.ajax({
+            url:'/ajax/cashier-confirm-order/',
+            type:'post',
+            data:"id="+id,
+            success:function (re) {
+                location.reload();
+            }
+        });
+    }
+</script>
 </body>
 
 </html>

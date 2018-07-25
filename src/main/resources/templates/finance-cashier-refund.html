@@ -50,7 +50,7 @@
                     <td th:text="${p.totalprice}">{{金额}}</td>
                     <td th:text="${p.is_paid}">{{付款状态}}</td>
                     <td>
-                        <span style="margin-left: 10px;"><a th:href="@{/cashier-confirm-refund/}+${p.refund_id}">确认</a></span>
+                        <span style="margin-left: 10px;"><a th:name="${p.refund_id}" href="javaScript:void(0)" onclick="cashierConfirmRefund(this)">确认</a></span>
                     </td>
                 </tr>
                 </tbody>
@@ -67,6 +67,19 @@
         crossorigin="anonymous"></script>
 <script src="../../static/js/index.js"></script>
 <script src="../../static/js/user/user.js"></script>
+<script>
+    function cashierConfirmRefund(self) {
+        var id = self.name;
+        $.ajax({
+            url:'/ajax/cashier-confirm-refound/',
+            type:'post',
+            data:"id="+id,
+            success:function (re) {
+                location.reload();
+            }
+        });
+    }
+</script>
 </body>
 
 </html>
