@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.trinityBakery.trinityBakery.dao.orderRepository;
 import com.trinityBakery.trinityBakery.dao.refundRepository;
+import com.trinityBakery.trinityBakery.dao.tihuoRepository;
 import com.trinityBakery.trinityBakery.model.order;
 import com.trinityBakery.trinityBakery.model.refund;
 import com.trinityBakery.trinityBakery.model.shoppingcart;
+import com.trinityBakery.trinityBakery.model.tihuo;
 
 
 @Controller
@@ -26,6 +28,8 @@ public class financeController {
 	private orderRepository orepository;
 	@Autowired
 	private refundRepository rrepository;
+	@Autowired
+	private tihuoRepository trepository;
 	
     @RequestMapping("finance-account-billofloading")
     public String finance_account_billofloading() {
@@ -41,13 +45,14 @@ public class financeController {
         return "finance-cashier";
     }
     
+    //错误信息：Request method 'GET' not supported
     @PostMapping("/cashier-confirm-order/{id}")
     public String cashierConfirmOrder(@PathVariable("id") String id){
         System.out.print(id);
         //出纳改变订单付款状态
         order od=new order();
         od=orepository.getOne(id);
-        od.setIs_confirm("已付款");
+        od.setIs_paid("已付款");
         orepository.save(od);
         return "redirect:/finance-cashier";
     }
@@ -61,20 +66,26 @@ public class financeController {
         return "finance-account";
     }
 
+    
     @RequestMapping("/account-confirm/{id}")
     public String accountConfirm(@PathVariable("id") String id){
-        //会计确认id为id的订单
+        //会计确认id为id的生成提货单
     	order od=new order();
     	od = orepository.getOne(id);
-    	od.setIs_paid("已付款");
+    	od.setTihuo("已生成提货单");
+    	tihuo th=new tihuo();
+    	th.setTihuo_id(id);
+    	th.setAddress(od.getAddress());
+    	th.setTihuo("未提货");
+    	th.setTotalprice(od.getTotalprice());
     	orepository.save(od);
+    	trepository.save(th);
         return "redirect:/finance-account";
     }
 
-    //会计确认提货单
+    //这个不要了
     @RequestMapping("/account-confirm-refound/{id}")
     public String accountConfirmRefound(@PathVariable("id") Integer id){
-        System.out.print(id);
         //会计确认id为id的退款单
         return "redirect:/finance-account-refund";
     }
@@ -97,10 +108,15 @@ public class financeController {
         return "finance-cashier-refund";
     }
     
+    //错误信息：No message available
     @RequestMapping("/cashier-confirm-refound/{id}")
-    public String cashierConfirmRefound(@PathVariable Integer id){
+    public String cashierConfirmRefound(@PathVariable String id){
         System.out.print(id);
-        //出纳更改订单的付款状态
+        //出纳更改订单的退款状态
+        order od=new order();
+        od=orepository.getOne(id);
+        od.setIs_paid("已退款");
+        orepository.save(od);
         return "redirect:/finance-cashier-refund";
     }
 

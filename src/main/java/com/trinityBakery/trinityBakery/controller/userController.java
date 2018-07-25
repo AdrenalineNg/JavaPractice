@@ -91,10 +91,12 @@ public class userController {
         return "user-refund";
     }
     
-    @RequestMapping("user-refund-detail/{id}")
-    public String user_refund_detail(@PathVariable("id") Integer id) {
+    @GetMapping("user-refund-detail/{id}")
+    public String user_refund_detail(Map<String, Object> map) {
         //通过id 查询退款单详情
-        System.out.print(id);
+    	List<detail> list = new ArrayList<detail>();
+        list = drepository.findAll();
+        map.put("detail", list);
         return "user-refund-detail";
     }
 
