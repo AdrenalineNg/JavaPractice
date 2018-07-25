@@ -64,19 +64,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="u:${users}" th:id="user-+${u.id}">
-                    <td th:text="${u.name}">{{客户名称}}</td>
-                    <td th:text="${u.id}">{{客户编码}}</td>
-                    <td th:text="${u.account}">{{登录账号}}</td>
-                    <td th:text="${u.contect}">{{联系人}}</td>
+                <tr th:each="u:${user}" th:id="user-+${u.u_id}">
+                    <td th:text="${u.u_name}">{{客户名称}}</td>
+                    <td th:text="${u.u_id}">{{客户编码}}</td>
+                    <td th:text="${u.phone}">{{登录账号}}</td>
+                    <td th:text="${u.contact_name}">{{联系人}}</td>
                     <td th:text="${u.address}">{{地址}}</td>
-                    <td th:text="${u.rank}">{{级别}}</td>
-                    <td th:text="${u.tel}">{{电话}}</td>
+                    <td th:text="${u.u_level}">{{级别}}</td>
+                    <td th:text="${u.phone}">{{电话}}</td>
                     <td th:text="${u.email}">{{邮箱}}</td>
                     <td>
-                        <a href="#" data-toggle="modal" data-target="#change" id="change-1"
+                        <a href="#" data-toggle="modal" data-target="#change" th:id="change-+${u.u_id}"
                         onclick="showUser(this)">修改</a>
-                        <a href="#" id="del-1" onclick="delUser(this)">删除</a>
+                        <a href="#" th:id="del-+${u.u_id}" onclick="delUser(this)">删除</a>
                     </td>
                 </tr>
                 </tbody>
@@ -183,7 +183,7 @@
 <script src="../../static/js/user/user.js"></script>
 <script>
     function delUser(self){
-        var id = self.id.toString().charAt(self.id.toString().length-1);
+        var id = self.id.substring(4);
         $.ajax({
             url:'/saleAjax/delUser',
             type:'post',

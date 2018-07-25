@@ -75,14 +75,11 @@ public class userController {
 //  }
  
     @RequestMapping(value = "/user-order-detail/{id}",method = RequestMethod.GET)    
-    public String user_order_detail(Map<String, Object> map1,Map<String, Object> map2) {
+    public String user_order_detail(Map<String, Object> map) {
         //通过id 查询订单详情
-    	List<detail> list1 = new ArrayList<detail>();
-        list1 = drepository.findAll();
-    	order od = new order();
-        od = orepository.getOne("20180003");
-        map1.put("detail", list1);
-        map2.put("order", od);
+    	List<detail> list = new ArrayList<detail>();
+        list = drepository.findAll();
+        map.put("detail", list);
         return "user-order-detail";
     }
     

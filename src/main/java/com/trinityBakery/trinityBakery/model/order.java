@@ -25,6 +25,15 @@ public class order {
     private String is_confirm;
     @Column(name="is_paid")
     private String is_paid;
+    @Column(name="tihuo")
+    private String tihuo;
+    
+	public String getTihuo() {
+		return tihuo;
+	}
+	public void setTihuo(String tihuo) {
+		this.tihuo = tihuo;
+	}
 	public String getOrder_id() {
 		return order_id;
 	}

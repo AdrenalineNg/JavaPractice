@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.trinityBakery.trinityBakery.dao.detailRepository;
 import com.trinityBakery.trinityBakery.dao.orderRepository;
 import com.trinityBakery.trinityBakery.dao.refundRepository;
+import com.trinityBakery.trinityBakery.dao.userRepository;
+import com.trinityBakery.trinityBakery.model.detail;
 import com.trinityBakery.trinityBakery.model.good;
 import com.trinityBakery.trinityBakery.model.order;
 import com.trinityBakery.trinityBakery.model.refund;
+import com.trinityBakery.trinityBakery.model.user;
 
 
 @Controller
@@ -29,6 +33,10 @@ public class saleController {
 	private orderRepository orepository;
 	@Autowired
 	private refundRepository rrepository;
+	@Autowired
+	private userRepository urepository;
+	@Autowired
+	private detailRepository drepository;
 	
 
 	@RequestMapping(value = "/sale",method = RequestMethod.GET)
@@ -39,14 +47,20 @@ public class saleController {
         return "sale";
     }
     
-    @RequestMapping("sale-user")
-    public String sale_user() {
+	@RequestMapping(value = "/sale-user",method = RequestMethod.GET)
+    public String sale_user(Map<String, Object> map) {
+		List<user> list = new ArrayList<user>();
+        list = urepository.findAll();
+        map.put("user", list);
         return "sale-user";
     }
     
-    @RequestMapping("/sale-order-detail/{id}")
-    public String sale_order_detail(@PathVariable("id") Integer id) {
+	@RequestMapping(value = "/sale-order-detail{id}",method = RequestMethod.GET)    
+    public String sale_order_detail(Map<String, Object> map) {
         //根据id获取详情
+		List<detail> list = new ArrayList<detail>();
+        list = drepository.findAll();
+        map.put("detail", list);
         return "sale-order-detail";
     }
     
@@ -58,11 +72,16 @@ public class saleController {
         return "sale-refund";
     }
     
-    @RequestMapping("/sale-refund-detail/{id}")
-    public String sale_refund_detail(@PathVariable("id") Integer id) {
+	//网页没写!!!!
+	@RequestMapping(value = "/sale-refund-detail{id}",method = RequestMethod.GET)
+    public String sale_refund_detail(Map<String, Object> map) {
         //更具id获取详情
+		List<detail> list = new ArrayList<detail>();
+        list = drepository.findAll();
+        map.put("detail", list);
         return "sale-refund-detail";
     }
+	
     @RequestMapping("/sale-create-user")
     public String saleCreateUser(HttpServletRequest request){
         String username =request.getParameter("c-username");
@@ -71,11 +90,20 @@ public class saleController {
         String address = request.getParameter("c-address");
         String tel = request.getParameter("c-tel");
         String email = request.getParameter("c-email");
-
         //创建客户
-
-        return "sale-user";
+        user us=new user();
+        us.setU_name(username);
+        us.setContact_name(contact);
+        us.setU_level(rank);
+        us.setAddress(address);
+        us.setPhone(tel);
+        us.setEmail(email);
+        us.setU_id(tel);
+        urepository.save(us);
+        
+        return "redirect:/sale-user";
     }
+    
     @RequestMapping("/sale-change-user")
     public String saleChangeUser(HttpServletRequest request){
         String id = request.getParameter("ch-user-id");
@@ -85,12 +113,19 @@ public class saleController {
         String address = request.getParameter("ch-address");
         String tel = request.getParameter("ch-tel");
         String email = request.getParameter("ch-email");
-
         //更新客户信息
-
-        return "sale-user";
+        user us=new user();
+        us.setU_name(username);
+        us.setContact_name(contact);
+        us.setU_level(rank);
+        us.setAddress(address);
+        us.setPhone(tel);
+        us.setEmail(email);
+        urepository.save(us);
+        return "redirect:/sale-user";
     }
 
+    //这个不要了
     @PostMapping("sale-search-user")
     public String saleSearchUser(HttpServletRequest request){
         String name = request.getParameter("search-name");

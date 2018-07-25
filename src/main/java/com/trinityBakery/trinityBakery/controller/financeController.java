@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,10 +40,15 @@ public class financeController {
         map.put("order", list);
         return "finance-cashier";
     }
-    @RequestMapping("/cashier-confirm-order/{id}")
-    public String cashierConfirmOrder(@PathVariable("id") Integer id){
+    
+    @PostMapping("/cashier-confirm-order/{id}")
+    public String cashierConfirmOrder(@PathVariable("id") String id){
         System.out.print(id);
         //出纳改变订单付款状态
+        order od=new order();
+        od=orepository.getOne(id);
+        od.setIs_confirm("已付款");
+        orepository.save(od);
         return "redirect:/finance-cashier";
     }
 
@@ -64,6 +71,7 @@ public class financeController {
         return "redirect:/finance-account";
     }
 
+    //会计确认提货单
     @RequestMapping("/account-confirm-refound/{id}")
     public String accountConfirmRefound(@PathVariable("id") Integer id){
         System.out.print(id);
@@ -88,10 +96,11 @@ public class financeController {
         map.put("refund", list);
         return "finance-cashier-refund";
     }
+    
     @RequestMapping("/cashier-confirm-refound/{id}")
     public String cashierConfirmRefound(@PathVariable Integer id){
         System.out.print(id);
-        //会计更改订单的付款状态
+        //出纳更改订单的付款状态
         return "redirect:/finance-cashier-refund";
     }
 
