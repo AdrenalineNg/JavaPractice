@@ -33,11 +33,15 @@
                         <img th:src="${p.img}" alt="...">
                         <div class="caption">
                             <div class="form-group">
-                                <label>名称：<span th:text="${p.name}">{{name}}</span></label>
+                                <label>名称：<span th:text="${p.p_name}">{{name}}</span></label>
                                 <br>
-                                <label>数量：<span th:text="${p.num}">{{number}}</span></label>
+                                <label>名称：<span th:text="${p.sfid}">{{sfid}}</span></label>
                                 <br>
-                                <label>入库时间：<span th:text="${p.date}">{{date}}</span></label>
+                                <label>数量：<span th:text="${p.quantity}">{{quantity}}</span></label>
+                                <br>
+                                <label>入库时间：<span th:text="${p.sto_date}">{{sto_date}}</span></label>
+                                <br>
+                                <label>保质期：<span th:text="${p.exp}">{{exp}}</span></label>
                             </div>
                         </div>
                     </div>
