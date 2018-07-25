@@ -114,7 +114,16 @@ public class saleController {
         String tel = request.getParameter("ch-tel");
         String email = request.getParameter("ch-email");
         //更新客户信息
+        System.out.println(id);
+        System.out.println(username);
+        System.out.println(contact);
+        System.out.println(rank);
+        System.out.println(address);
+        System.out.println(tel);
+        System.out.println(email);
+
         user us=new user();
+        us=urepository.getOne(id);
         us.setU_name(username);
         us.setContact_name(contact);
         us.setU_level(rank);
