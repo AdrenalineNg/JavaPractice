@@ -19,7 +19,7 @@ public class saleAjaxController {
 	@Autowired
 	private orderRepository orepository;
 	
-	//这个不行
+	//获取id有问题
     @PostMapping("/salesConfirmOrder")
     public String salesConfirmOrder(HttpServletRequest request){
         String id = request.getParameter("id");
@@ -31,14 +31,14 @@ public class saleAjaxController {
         return "success";
     }
     
-    
+	//获取id有问题
     @PostMapping("/salesConfirmRefound")
     public String salesConfirmRefound(HttpServletRequest request){
         String id = request.getParameter("id");
         //更具id更改退款单的销售确认状态
         order od=new order();
         od=orepository.getOne(id);
-        od.setIs_paid("同意退款");
+        od.setIs_confirm("同意退款");
         orepository.save(od);
         return "success";
     }

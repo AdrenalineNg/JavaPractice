@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import com.trinityBakery.trinityBakery.dao.storageRepository;
 import com.trinityBakery.trinityBakery.dao.tihuoRepository;
 import com.trinityBakery.trinityBakery.model.detail;
 import com.trinityBakery.trinityBakery.model.order;
+import com.trinityBakery.trinityBakery.model.storage;
 import com.trinityBakery.trinityBakery.model.tihuo;
 
 
@@ -35,8 +37,11 @@ public class FinishedProductLibraryController {
     }
     
 	//库存网页的表结构有问题    sfid,p_name,sto_date, quantity,exp,p_img
-    @RequestMapping("storehouse")
-    public String storehouse() {
+    @GetMapping("storehouse")
+    public String storehouse(Map<String, Object> map) {
+    	List<storage> list = new ArrayList<storage>();
+        list = srepository.findAll();
+        map.put("storage", list);
         return "storehouse";
     }
 
@@ -55,9 +60,12 @@ public class FinishedProductLibraryController {
     }
 
     @RequestMapping("/fpl-del/{id}")
-    public String fplDel(@PathVariable("id") Integer id){
+    public String fplDel(@PathVariable("id") String id){
         System.out.print(id);
         //删除id为id的库存
+        storage st=new storage();
+        st=srepository.getOne(id);
+        srepository.delete(st);
         return "redirect:/storehouse";
     }
 }

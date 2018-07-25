@@ -59,14 +59,14 @@
                     </tr>
                     </thead>
                     <tbody id="t_body">
-                    <tr id="p-1" th:each="p:${o_production}">
-                        <td><img src="../../static/img/1.jpg" th:img="${p.p_img}" alt=""></td>
-                        <td th:text="${p.p_id}">{{id}}</td>
-                        <td th:text="${p.p_name}">{{商品名称}}</td>
-                        <td th:text="${p.p_weight}">{{规格}}</td>
-                        <td id="p-1-price" th:text="${p.p_price}">5</td>
-                        <td id="p-1-num" th:text="${p.p_num}">1</td>
-                        <td id="p-1-money" th:text="${p.p_money}">5</td>
+                    <tr id="p-1" th:each="p:${detail}">
+                        <td><img th:src="${p.c_img}" alt=""></td>
+                        <td th:text="${p.c_id}">{{id}}</td>
+                        <td th:text="${p.c_name}">{{商品名称}}</td>
+                        <td th:text="${p.c_weight}">{{规格}}</td>
+                        <td id="p-1-price" th:text="${p.c_price}">5</td>
+                        <td id="p-1-num" th:text="${p.c_num}">1</td>
+                        <td id="p-1-money" th:text="${p.c_money}">5</td>
                     </tr>
                     </tbody>
                 </table>
