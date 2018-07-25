@@ -72,7 +72,6 @@ public class saleController {
         return "sale-refund";
     }
     
-	//网页没写!!!!
 	@RequestMapping(value = "/sale-refund-detail{id}",method = RequestMethod.GET)
     public String sale_refund_detail(Map<String, Object> map) {
         //更具id获取详情
@@ -134,12 +133,16 @@ public class saleController {
         return "redirect:/sale-user";
     }
 
-    //这个不要了
+    //搜索框有问题
     @PostMapping("sale-search-user")
-    public String saleSearchUser(HttpServletRequest request){
+    public String saleSearchUser(HttpServletRequest request,Map<String, Object> map){
         String name = request.getParameter("search-name");
         //查询客户名称为name的客户
-
+        user us=new user();
+        us=urepository.getOne(name);
+		List<user> list = new ArrayList<user>();
+        list.add(us);
+        map.put("user", list);
         return "sale-user";
     }
 }
