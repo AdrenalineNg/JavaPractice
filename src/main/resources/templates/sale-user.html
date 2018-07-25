@@ -138,18 +138,18 @@
             </div>
             <div class="modal-body">
                 <form method="post" th:action="@{/sale-change-user}">
-                    <input type="hidden" id="ch-user-id">
+                    <input type="hidden" id="ch-user-id" name="ch-user-id">
                     <div class="form-group">
                         <label for="ch-username">客户名称</label>
-                        <input type="text" class="form-control" id="ch-username" placeholder="客户名称">
+                        <input type="text" class="form-control" id="ch-username" name="ch-username" placeholder="客户名称">
                     </div>
                     <div class="form-group">
                         <label for="ch-contect">联系人</label>
-                        <input type="text" class="form-control" id="ch-contect" placeholder="联系人">
+                        <input type="text" class="form-control" id="ch-contect" name="ch-contect" placeholder="联系人">
                     </div>
                     <div class="form-group">
                         <label for="ch-rank">客户级别</label>
-                        <input type="text" class="form-control" id="ch-rank" placeholder="客户级别" list="user-rank">
+                        <input type="text" class="form-control" id="ch-rank" name="ch-rank" placeholder="客户级别" list="user-rank">
                         <datalist id="user-rank">
                             <option value="普通"></option>
                             <option value="VIP"></option>
@@ -158,15 +158,15 @@
                     </div>
                     <div class="form-group">
                         <label for="ch-address">地址</label>
-                        <input type="text" class="form-control" id="ch-address" placeholder="地址">
+                        <input type="text" class="form-control" id="ch-address"  name="ch-address" placeholder="地址">
                     </div>
                     <div class="form-group">
                         <label for="ch-tel">电话</label>
-                        <input type="text" class="form-control" id="ch-tel" placeholder="电话">
+                        <input type="text" class="form-control" id="ch-tel" name="ch-tel" placeholder="电话">
                     </div>
                     <div class="form-group">
                         <label for="ch-email">邮箱</label>
-                        <input type="text" class="form-control" id="ch-email" placeholder="邮箱">
+                        <input type="text" class="form-control" id="ch-email"  name="ch-email" placeholder="邮箱">
                     </div>
                     <button type="submit" class="btn btn-default">保存</button>
                 </form>
@@ -198,7 +198,7 @@
         });
     }
     function showUser(self) {
-        var id = self.id.toString().charAt(self.id.toString().length-1);
+        var id = self.id.toString().substring(7);
         var tdList = $('#user-'+id).children("td");
         $('#ch-username').val(tdList[0].innerHTML);
         $('#ch-contect').val(tdList[3].innerHTML);
