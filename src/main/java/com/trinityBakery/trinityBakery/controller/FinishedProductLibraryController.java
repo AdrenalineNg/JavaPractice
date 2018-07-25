@@ -36,7 +36,7 @@ public class FinishedProductLibraryController {
         return "finishedProducLibrary";
     }
     
-	//库存网页的表结构有问题    sfid,p_name,sto_date, quantity,exp,p_img
+
     @GetMapping("storehouse")
     public String storehouse(Map<String, Object> map) {
     	List<storage> list = new ArrayList<storage>();
