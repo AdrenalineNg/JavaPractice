@@ -34,7 +34,7 @@ public class AjaxController {
     private orderRepository oRepository;
 	@Autowired
     private detailRepository dRepository;
-	
+
     @RequestMapping(value = "/createAdmin", method = RequestMethod.POST)
     @ResponseBody
     public String createAdmin(HttpServletRequest request){
@@ -213,6 +213,32 @@ public class AjaxController {
         catch(Exception e) {
        	return "error";
         }
+        return "success";
+    }
+
+
+    @RequestMapping("/cashier-confirm-refound")
+    public String cashierConfirmRefound(HttpServletRequest request){
+        String id = request.getParameter("id");
+        System.out.println(id);
+        //出纳更改订单的退款状态
+        order od=new order();
+        od=oRepository.getOne(id);
+        od.setIs_paid("已退款");
+        oRepository.save(od);
+        return "success";
+    }
+
+
+    @PostMapping("/cashier-confirm-order")
+    public String cashierConfirmOrder(HttpServletRequest request){
+        String id = request.getParameter("id");
+        System.out.println(id);
+        //出纳改变订单付款状态
+        order od=new order();
+        od=oRepository.getOne(id);
+        od.setIs_paid("已付款");
+        oRepository.save(od);
         return "success";
     }
 }

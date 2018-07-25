@@ -45,17 +45,7 @@ public class financeController {
         return "finance-cashier";
     }
     
-    //错误信息：Request method 'GET' not supported
-    @PostMapping("/cashier-confirm-order/{id}")
-    public String cashierConfirmOrder(@PathVariable("id") String id){
-        System.out.print(id);
-        //出纳改变订单付款状态
-        order od=new order();
-        od=orepository.getOne(id);
-        od.setIs_paid("已付款");
-        orepository.save(od);
-        return "redirect:/finance-cashier";
-    }
+
 
     @RequestMapping(value = "/finance-account",method = RequestMethod.GET) 
     public String finance_account(Map<String, Object> map) {
@@ -108,16 +98,6 @@ public class financeController {
         return "finance-cashier-refund";
     }
     
-    //错误信息：No message available
-    @RequestMapping("/cashier-confirm-refound/{id}")
-    public String cashierConfirmRefound(@PathVariable String id){
-        System.out.print(id);
-        //出纳更改订单的退款状态
-        order od=new order();
-        od=orepository.getOne(id);
-        od.setIs_paid("已退款");
-        orepository.save(od);
-        return "redirect:/finance-cashier-refund";
-    }
+
 
 }
