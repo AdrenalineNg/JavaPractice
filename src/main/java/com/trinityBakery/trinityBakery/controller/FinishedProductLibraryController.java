@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.trinityBakery.trinityBakery.dao.goodRepository;
+import com.trinityBakery.trinityBakery.dao.storageRepository;
 import com.trinityBakery.trinityBakery.dao.tihuoRepository;
 import com.trinityBakery.trinityBakery.model.detail;
 import com.trinityBakery.trinityBakery.model.order;
@@ -22,6 +23,8 @@ import com.trinityBakery.trinityBakery.model.tihuo;
 public class FinishedProductLibraryController {
 	@Autowired
 	private tihuoRepository trepository;
+	@Autowired
+	private storageRepository srepository;
 
 	@RequestMapping(value = "/finishedProducLibrary",method = RequestMethod.GET) 
     public String finishedProducLibrary(Map<String, Object> map) {
@@ -31,6 +34,7 @@ public class FinishedProductLibraryController {
         return "finishedProducLibrary";
     }
     
+	//库存网页的表结构有问题    sfid,p_name,sto_date, quantity,exp,p_img
     @RequestMapping("storehouse")
     public String storehouse() {
         return "storehouse";
