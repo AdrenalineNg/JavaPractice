@@ -35,9 +35,9 @@
         </div>
         <div class="item-detail-main">
             <div class="row">
-                <div class="col-sm-6 col-md-4" th:each="p:${production}">
+                <div class="col-sm-6 col-md-4" th:each="p:${storage}">
                     <div class="thumbnail">
-                        <img th:src="${p.img}" alt="...">
+                        <img th:src="${p.p_img}" alt="...">
                         <div class="caption">
                             <div class="form-group">
                                 <label>名称：<span th:text="${p.p_name}">{{name}}</span></label>
@@ -50,7 +50,7 @@
                                 <br>
                                 <label>保质期：<span th:text="${p.exp}">{{exp}}</span></label>
                             </div>
-                            <p><a th:href="@{/fpl-del/}+${p.id}" class="btn btn-primary btn-block" role="button">销毁</a></p>
+                            <p><a th:href="@{/fpl-del/}+${p.sfid}" class="btn btn-primary btn-block" role="button">销毁</a></p>
                         </div>
                     </div>
                 </div>

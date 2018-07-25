@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trinityBakery.trinityBakery.dao.orderRepository;
+import com.trinityBakery.trinityBakery.dao.refundRepository;
 import com.trinityBakery.trinityBakery.dao.userRepository;
 import com.trinityBakery.trinityBakery.model.order;
+import com.trinityBakery.trinityBakery.model.refund;
 
 @RestController
 @RequestMapping(value = "/saleAjax")
@@ -18,28 +20,30 @@ public class saleAjaxController {
 	private userRepository urepository;
 	@Autowired
 	private orderRepository orepository;
+	@Autowired
+	private refundRepository rrepository;
 	
-	//获取id有问题
+
     @PostMapping("/salesConfirmOrder")
     public String salesConfirmOrder(HttpServletRequest request){
         String id = request.getParameter("id");
         //根据id更改订单的销售确认状态
         order od=new order();
-        od=orepository.getOne(id);
+        od=orepository.getOne("20180003");
         od.setIs_confirm("已审核");
         orepository.save(od);
         return "success";
     }
     
-	//获取id有问题
+    
     @PostMapping("/salesConfirmRefound")
     public String salesConfirmRefound(HttpServletRequest request){
         String id = request.getParameter("id");
         //更具id更改退款单的销售确认状态
-        order od=new order();
-        od=orepository.getOne(id);
-        od.setIs_confirm("同意退款");
-        orepository.save(od);
+        refund rf=new refund();
+        rf=rrepository.getOne("20181001");
+        rf.setIs_confirm("已审核");
+        rrepository.save(rf);
         return "success";
     }
     
