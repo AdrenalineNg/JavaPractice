@@ -71,6 +71,16 @@ public class saleController {
         map.put("refund", list);
         return "sale-refund";
     }
+	
+    
+//	@RequestMapping(value = "/sale-refund",method = RequestMethod.GET)
+//    public List<refund> sale_refund(Map<String, Object> map) {
+//    	List<refund> list = new ArrayList<refund>();
+//        list = rrepository.findAll();
+//        map.put("refund", list);
+//        return list;
+//    }
+    
     
 	@RequestMapping(value = "/sale-refund-detail{id}",method = RequestMethod.GET)
     public String sale_refund_detail(Map<String, Object> map) {
@@ -137,6 +147,7 @@ public class saleController {
     @PostMapping("sale-search-user")
     public String saleSearchUser(HttpServletRequest request,Map<String, Object> map){
         String name = request.getParameter("search-name");
+        System.out.println(name);
         //查询客户名称为name的客户
         user us=new user();
         us=urepository.getOne(name);

@@ -104,7 +104,7 @@ public class ProductionPlanningSectionController {
         return "redirect:/pps-plan";
     }
     
-    //库存网页表结构有问题
+
     @RequestMapping("pps-restorhous")
     public String pps_restorhous(Map<String, Object> map) {
     	List<storage> list = new ArrayList<storage>();
