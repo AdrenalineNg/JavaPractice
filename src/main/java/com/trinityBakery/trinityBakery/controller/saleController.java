@@ -143,7 +143,6 @@ public class saleController {
         return "redirect:/sale-user";
     }
 
-    //搜索框有问题
     @PostMapping("sale-search-user")
     public String saleSearchUser(HttpServletRequest request,Map<String, Object> map){
         String name = request.getParameter("search-name");
